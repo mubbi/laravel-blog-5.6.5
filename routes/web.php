@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('public/home');
-});
+Route::get('/', 'Guest\HomeController@index');
 
 Auth::routes();
 
