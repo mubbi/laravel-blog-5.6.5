@@ -23,15 +23,16 @@ Categories
 - name
 - slug
 
-blog_category
-- category_id
-- blog_id
-
 comments
 - id
 - body
 - blog_id
 - user_id
+- is_active
+
+blog_category
+- category_id
+- blog_id
 
 blog_comment
 - blog_id
