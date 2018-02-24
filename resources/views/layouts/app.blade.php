@@ -71,8 +71,11 @@
                     </div>
                 </div>
             </div>
-
         </main>
+
+        <footer>
+            @include('includes.footer')
+        </footer>
     </div>
 
     <!-- Scripts -->
