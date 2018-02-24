@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Homepage</div>
+    <div class="card-header">Showing Blogs in category "XYZ"</div>
 
     <div class="card-body">
 
