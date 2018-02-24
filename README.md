@@ -7,6 +7,7 @@ This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
   - Featured Image
   - Admin Area
   - RSS Feed
+  - Laravel Migrations
 
 
 ### Tech
