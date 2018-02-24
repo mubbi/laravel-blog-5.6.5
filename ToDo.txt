@@ -1,0 +1,41 @@
+1. Home - Blogs List - with pagination
+2. View Blog
+3. Categories List
+4. Category Blogs List - with pagination
+5.
+
+
+
+
+blogs
+- id
+- title
+- slug
+- image
+- excerpt
+- description
+- views
+- user_id
+- is_active
+- timestamps
+
+Categories
+- name
+- slug
+
+blog_category
+- category_id
+- blog_id
+
+comments
+- id
+- body
+- blog_id
+- user_id
+
+blog_comment
+- blog_id
+- comment_id
+
+users
+- default laravel
