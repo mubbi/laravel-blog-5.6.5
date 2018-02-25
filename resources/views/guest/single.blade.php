@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ $blog->image }}
+                <img class="img-thumbnail img-responsive mb-4" src="{{ $blog->image }}" alt="{{ $blog->title }}">
             </div>
             <div class="col-md-12">
                 {!! $blog->description !!}

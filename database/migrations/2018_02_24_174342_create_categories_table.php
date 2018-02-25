@@ -17,6 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 150)->nullable(false);
             $table->string('slug', 180)->unique()->nullable(false);
+            $table->integer('user_id')->unsigned()->nullable(false);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

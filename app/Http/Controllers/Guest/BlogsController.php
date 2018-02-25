@@ -17,4 +17,15 @@ class BlogsController extends Controller
     {
         return view('guest/single', ['blog' => $blog]);
     }
+
+    /**
+     * Show the Single Blog.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function category(Category $category)
+    {
+        $blogs = Category::simplePaginate(1);
+        return view('guest/single', ['blogs' => $blogs]);
+    }
 }

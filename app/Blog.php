@@ -33,4 +33,28 @@ class Blog extends Model
     {
         return $query->where('is_active', 1);
     }
+
+    /**
+     * Get the blogs record associated with the user.
+     */
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    /**
+     * The category that belong to the blog.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }

@@ -10,11 +10,11 @@
             @foreach($blogs as $blog)
             <div class="col-md-6">
                 <div class="card">
-                    <img class="card-img-top" src="http://placehold.it/450x300" alt="Card image cap">
+                    <img class="card-img-top" src="{{ $blog->image }}" alt="{{ $blog->title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $blog->title }}</h5>
                         <p class="card-text">{{ $blog->excerpt }}</p>
-                        <a href="{{ url('post/'.$blog->slug) }}" class="btn btn-primary">Read More <i class="fas fa-chevron-right"></i></a>
+                        <a href="{{ url('post/'.$blog->slug) }}" class="btn btn-primary btn-sm">Read More <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
