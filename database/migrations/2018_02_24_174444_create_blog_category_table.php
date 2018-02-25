@@ -15,9 +15,9 @@ class CreateBlogCategoryTable extends Migration
     {
         Schema::create('blog_caetgory', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('blog_id')->unsigned();
+            $table->integer('blog_id')->unsigned()->nullable(false);
             $table->foreign('blog_id')->references('id')->on('blogs');
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable(false);
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

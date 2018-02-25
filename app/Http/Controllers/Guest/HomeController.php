@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,6 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('guest/home');
+        $blogs = Blog::active()->simplePaginate(1);
+        return view('guest/home', ['blogs' => $blogs]);
     }
 }
