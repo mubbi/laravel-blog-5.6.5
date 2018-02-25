@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 use App\Category;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,8 +17,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Share sidebar Categories with all views
-        $categories = Category::select('name', 'slug')->get();
-        View::share('sidebar_categories', $categories);
+        if (Schema::hasTable('categories')) {
+            $categories = Category::select('name', 'slug')->get();
+            View::share('sidebar_categories', $categories);
+        }
     }
 
     /**
