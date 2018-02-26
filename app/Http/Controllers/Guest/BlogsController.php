@@ -26,8 +26,6 @@ class BlogsController extends Controller
      */
     public function category(Category $category)
     {
-        $blogs = Blog::whereHas('categories')->simplePaginate(1);
-
-        return view('guest/category', ['blogs' => $blogs, 'category' => $category]);
+        return view('guest/category', ['category' => $category]);
     }
 }

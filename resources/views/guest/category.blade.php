@@ -2,12 +2,17 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Showing by Category "{{ $category->name }}"</div>
+    <div class="card-header">Showing blogs in category "{{ $category->name }}"</div>
 
     <div class="card-body">
 
         <div class="row mb-5">
-            @foreach($blogs as $blog)
+            @if(count($category->blogs) < 1 )
+            <div class="col-md-12">
+                <h3>No blogs found in this category.</h3>
+            </div>
+            @endif
+            @foreach($category->blogs as $blog)
             <div class="col-md-6">
                 <div class="card">
                     <img class="card-img-top" src="{{ $blog->image }}" alt="{{ $blog->title }}">
@@ -23,7 +28,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ $blogs->links() }}
+                { $category->blogs->links() }
             </div>
         </div>
 
