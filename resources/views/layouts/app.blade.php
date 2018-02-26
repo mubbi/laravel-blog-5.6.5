@@ -65,6 +65,12 @@
 
         <main class="py-4">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @include('includes.errors')
+                        @include('includes.success')
+                    </div>
+                </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         @yield('content')
