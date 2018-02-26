@@ -13,4 +13,9 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Post');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

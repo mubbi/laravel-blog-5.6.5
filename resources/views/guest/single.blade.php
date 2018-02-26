@@ -19,7 +19,8 @@
 
     </div>
 </div>
-<div class="card">
+
+<div class="card mb-3">
     <div class="card-header">Share</div>
 
     <div class="card-body">
@@ -54,14 +55,48 @@
 
     </div>
 </div>
-<div class="card">
-    <div class="card-header">Comments</div>
+
+<div class="card mb-3">
+    <div class="card-header">Comments <small class="float-right">{{ $total_comments }} Comments</small></div>
 
     <div class="card-body">
 
         <div class="row">
             <div class="col-md-12">
-                Comments list
+
+                @if(count($comments) < 1)
+                <h4>No comments yet! Be the first to comment</h4>
+                @else
+                    <ul class="list-unstyled">
+                        @foreach($comments as $comment)
+                            <li class="media mb-3">
+                                <img class="mr-3 rounded-circle" src="https://www.gravatar.com/avatar/{{ md5( strtolower( trim("$comment->email") ) ) }}?d=http://placehold.it/70" alt="{{ $comment->name }}">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">{{ $comment->name }}</h5>
+                                    {{ $comment->body }}
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+            </div>
+            <div class="col-md-12">
+                {{ $comments->links() }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Add a Comment</div>
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                Comment Form
             </div>
         </div>
 

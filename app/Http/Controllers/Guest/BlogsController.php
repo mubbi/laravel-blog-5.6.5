@@ -16,7 +16,9 @@ class BlogsController extends Controller
      */
     public function single(Blog $blog)
     {
-        return view('guest/single', ['blog' => $blog]);
+        $comments = $blog->comments()->active()->orderBy('created_at', 'desc')->simplePaginate(1);
+        $total_comments = $blog->comments()->active()->count();
+        return view('guest/single', ['blog' => $blog, 'comments' => $comments,  'total_comments' => $total_comments]);
     }
 
     /**
@@ -26,7 +28,7 @@ class BlogsController extends Controller
      */
     public function category(Category $category)
     {
-        $blogs = $category->blogs()->orderBy('created_at', 'desc')->paginate(1);
+        $blogs = $category->blogs()->active()->orderBy('created_at', 'desc')->simplePaginate(1);
         return view('guest/category', ['blogs'=> $blogs, 'category' => $category]);
     }
 }
