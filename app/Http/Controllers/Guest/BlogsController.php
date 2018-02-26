@@ -26,6 +26,7 @@ class BlogsController extends Controller
      */
     public function category(Category $category)
     {
-        return view('guest/category', ['category' => $category]);
+        $blogs = $category->blogs()->paginate(1);
+        return view('guest/category', ['blogs'=> $blogs, 'category' => $category]);
     }
 }

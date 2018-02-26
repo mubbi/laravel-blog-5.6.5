@@ -7,12 +7,12 @@
     <div class="card-body">
 
         <div class="row mb-5">
-            @if(count($category->blogs) < 1 )
+            @if(count($blogs) < 1 )
             <div class="col-md-12">
                 <h3>No blogs found in this category.</h3>
             </div>
             @endif
-            @foreach($category->blogs as $blog)
+            @foreach($blogs as $blog)
             <div class="col-md-6">
                 <div class="card">
                     <img class="card-img-top" src="{{ $blog->image }}" alt="{{ $blog->title }}">
@@ -28,7 +28,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                { $category->blogs->links() }
+                {{ $blogs->links() }}
             </div>
         </div>
 
