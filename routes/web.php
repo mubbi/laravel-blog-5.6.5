@@ -18,3 +18,5 @@ Route::get('category/{category}', 'Guest\BlogsController@category');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('feed', 'FeedsController@index');

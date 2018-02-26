@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::active()->simplePaginate(1);
+        $blogs = Blog::active()->orderBy('created_at', 'desc')->simplePaginate(1);
         return view('guest/home', ['blogs' => $blogs]);
     }
 }

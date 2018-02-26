@@ -26,7 +26,7 @@ class BlogsController extends Controller
      */
     public function category(Category $category)
     {
-        $blogs = $category->blogs()->paginate(1);
+        $blogs = $category->blogs()->orderBy('created_at', 'desc')->paginate(1);
         return view('guest/category', ['blogs'=> $blogs, 'category' => $category]);
     }
 }
