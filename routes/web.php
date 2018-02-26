@@ -12,12 +12,15 @@
 */
 
 Route::get('/', 'Guest\HomeController@index');
+Route::get('post', function () {
+    return redirect('/');
+});
+
 Route::get('post/{blog}', 'Guest\BlogsController@single');
 Route::get('category/{category}', 'Guest\BlogsController@category');
 Route::post('post/comment', 'Guest\BlogsController@comment');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('feed', 'FeedsController@index');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
