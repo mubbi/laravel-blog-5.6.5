@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the blogs record associated with the user.
+     */
+    public function blog()
+    {
+        return $this->hasMany('App\Blog');
+    }
 }
