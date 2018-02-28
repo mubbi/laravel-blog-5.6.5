@@ -13594,7 +13594,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(36);
 
 
 /***/ }),
@@ -13630,8 +13630,6 @@ $(function () {
     'placement': 'top'
   });
 });
-
-__webpack_require__(36);
 
 /***/ }),
 /* 12 */
@@ -35807,31 +35805,6 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports) {
-
-$("#subscribe_form").submit(function (e) {
-    // Submit Ajax Request
-    $.ajax({
-        url: '$("#subscribe_form").attr("action")',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            email_id: $("#subscribe_form #email_id").val()
-        }
-    }).done(function () {
-        console.log("success");
-    }).fail(function () {
-        console.log("error");
-    }).always(function () {
-        console.log("complete");
-    });
-
-    // Stop Form
-    e.preventDefault();
-});
-
-/***/ }),
-/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
