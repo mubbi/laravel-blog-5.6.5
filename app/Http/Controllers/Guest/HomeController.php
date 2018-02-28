@@ -7,6 +7,7 @@ use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendSubscriptionVerificationEmail;
+use App\Listeners\EmailSubscribedListener;
 
 class HomeController extends Controller
 {
@@ -40,6 +41,7 @@ class HomeController extends Controller
             $subscriber->confirmation_token = md5(uniqid($request->email, true));
             $subscriber->save();
             // Automatic Send Email for confirmation
+            event(new EmailSubscribedListener($subscriber));
             SendSubscriptionVerificationEmail::dispatch($subscriber);
             // Return Success Message
             return response()->json('Check Your Email Inbox for confirmation', 200);
