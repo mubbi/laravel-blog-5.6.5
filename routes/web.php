@@ -20,6 +20,8 @@ Route::get('post/{blog}', 'Guest\BlogsController@single');
 Route::get('category/{category}', 'Guest\BlogsController@category');
 Route::post('post/comment', 'Guest\BlogsController@comment');
 
+Route::post('subscribe', 'Guest\HomeController@subscribe');
+
 Route::get('feed', 'FeedsController@index');
 
 Auth::routes();

@@ -10,7 +10,7 @@ $("#subscribe_form").submit(function(e) {
         type: 'POST',
         dataType: 'json',
         data: {
-            email_id: $("#subscribe_form #email_id").val()
+            email: $("#subscribe_form #email").val()
         },
     })
     .done(function() {

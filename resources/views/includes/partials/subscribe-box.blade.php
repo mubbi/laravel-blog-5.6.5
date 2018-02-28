@@ -4,8 +4,8 @@
         <form action="{{ url('subscribe') }}" method="post" id="subscribe_form">
             <div class="form-row">
                 <div class="col-md-12">
-                    <label for="email_id">Email ID <span class="required">*</span></label>
-                    <input type="email" class="form-control" name="email_id" value="{{ old('email_id') }}" placeholder="Your Email ID" required>
+                    <label for="email">Email ID <span class="required">*</span></label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Your Email ID" required>
                     <small>Get Latest Updates by Email</small>
                 </div>
                 <div class="col-md-12 mt-3">
