@@ -13594,7 +13594,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(36);
+module.exports = __webpack_require__(37);
 
 
 /***/ }),
@@ -13626,10 +13626,20 @@ __webpack_require__(12);
 
 // Enable Tooltip everywhere
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip({
-    'placement': 'top'
-  });
+    $('[data-toggle="tooltip"]').tooltip({
+        'placement': 'top'
+    });
 });
+
+// Auto Include CSRF token in ajax post requests
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+// Subscriber Form
+__webpack_require__(36);
 
 /***/ }),
 /* 12 */
@@ -35805,6 +35815,53 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports) {
+
+$("#subscribe_form").submit(function (e) {
+    $('#subscriber_response').html('');
+
+    if ($("#subscribe_form #email").val() == '') {
+        alert('Email Required');
+    } else {
+        // Submit Ajax Request
+        $.ajax({
+            url: $("#subscribe_form").attr("action"),
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                email: $("#subscribe_form #email").val()
+            }
+        }).done(function (data) {
+            $('#subscriber_response').html('<div class="alert alert-success">' + data + '</div>');
+        }).fail(function (data) {
+            // If there are some errors
+            if (data.status === 422) {
+                //process validation errors here.
+                var errors = data.responseJSON.errors; //this will get the errors response data.
+
+                //show them somewhere in the markup
+                errors_html = '<div class="alert alert-danger"><ul>';
+
+                $.each(errors, function (key, value) {
+                    errors_html += '<li>' + value[0] + '</li>'; //showing only the first error.
+                });
+                errors_html += '</ul></div>';
+
+                $('#subscriber_response').html(errors_html); //appending to a <div id="form-errors"></div> inside form
+            } else {
+                $('#subscriber_response').html('<div class="alert alert-danger">Something Went Wrong.</div>'); //appending to a <div id="form-errors"></div> inside form
+            }
+        }).always(function () {
+            console.log("Subscribe form process Completed");
+        });
+    }
+
+    // Stop Form
+    e.preventDefault();
+});
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Blog;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,19 +29,17 @@ class HomeController extends Controller
     {
         // Validate data
         $validatedData = $request->validate([
-            'email' => 'required|email'
+            'email' => 'required|email|unique:subscribers'
         ]);
 
         if ($validatedData) {
             // Save Subscriber
             $subscriber = new Subscriber;
             $subscriber->email = $request->email;
-            $comment->save();
-
-            // Redirect back with success
-            return back()->with('success', 'Check your Email for Confirnmation');
+            $subscriber->save();
+            return response()->json('Check Your Email Inbox for confirmation', 200);
         }
-        // Redirect back with error
-        return back()->withInput()->with('errors', 'Unable to Subscribe');
+        // return error
+        return response()->json('Unable to Subscribe', 422);
     }
 }

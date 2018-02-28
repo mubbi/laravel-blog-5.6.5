@@ -28,5 +28,12 @@ $(function () {
     });
 });
 
+// Auto Include CSRF token in ajax post requests
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 // Subscriber Form
 require('./subscriber-form');
