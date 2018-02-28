@@ -35,7 +35,7 @@ class Blog extends Model
     }
 
     /**
-     * Get the blogs record associated with the user.
+     * Get the user record associated with the blog.
      */
     public function user()
     {
