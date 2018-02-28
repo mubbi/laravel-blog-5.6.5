@@ -20,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->text('body')->nullable(false);
             $table->integer('blog_id')->unsigned()->nullable(false);
             $table->foreign('blog_id')->references('id')->on('blogs');
-            $table->integer('is_active')->unsigned()->default(1);
+            $table->tinyInteger('is_active')->unsigned()->default(1);
             $table->timestamps();
         });
     }

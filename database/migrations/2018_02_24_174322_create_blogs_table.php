@@ -23,7 +23,7 @@ class CreateBlogsTable extends Migration
             $table->integer('views')->unsigned()->default(0);
             $table->integer('user_id')->unsigned()->nullable(false);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('is_active')->unsigned()->default(0);
+            $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });
     }
