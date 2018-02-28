@@ -27,3 +27,6 @@ $(function () {
         'placement': 'top'
     });
 });
+
+// Subscriber Form
+require('./subscriber-form');
