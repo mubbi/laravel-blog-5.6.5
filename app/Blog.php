@@ -29,6 +29,11 @@ class Blog extends Model
         return 'slug';
     }
 
+    /**
+     * Custome scope for Active blogs.
+     *
+     * @return string
+     */
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
