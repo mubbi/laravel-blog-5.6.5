@@ -6,6 +6,7 @@ use App\Blog;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendSubscriptionVerificationEmail;
 
 class HomeController extends Controller
 {
@@ -36,10 +37,23 @@ class HomeController extends Controller
             // Save Subscriber
             $subscriber = new Subscriber;
             $subscriber->email = $request->email;
+            $subscriber->confirmation_token = md5(uniqid($request->email, true));
             $subscriber->save();
+            // Automatic Send Email for confirmation
+            dispatch(new SendSubscriptionVerificationEmail($subscriber));
+            // Return Success Message
             return response()->json('Check Your Email Inbox for confirmation', 200);
         }
         // return error
         return response()->json('Unable to Subscribe', 422);
+    }
+
+    public function subscribeVerify($token)
+    {
+        $subscriber = Subscriber::where('confirmation_token', $token)->first();
+        $subscriber->is_active = 1;
+        if ($subscriber->save()) {
+            return view('guest.subscribe-confirmation', ['subscriber' => $subscriber]);
+        }
     }
 }

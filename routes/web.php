@@ -21,6 +21,7 @@ Route::get('category/{category}', 'Guest\BlogsController@category');
 Route::post('post/comment', 'Guest\BlogsController@comment');
 
 Route::post('subscribe', 'Guest\HomeController@subscribe');
+Route::get('subscribe/verify/{token}', 'Guest\HomeController@subscribeVerify');
 
 Route::get('feed', 'FeedsController@index');
 
