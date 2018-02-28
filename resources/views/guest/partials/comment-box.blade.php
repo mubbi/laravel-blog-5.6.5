@@ -12,15 +12,15 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="name">Name <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Your Name">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Your Name" required>
                         </div>
                         <div class="col-md-6">
                             <label for="email">Email <span class="required">*</span></label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Your Email ID">
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Your Email ID" required>
                         </div>
                         <div class="col-md-12 mt-3">
                             <label for="name">Your Comment <span class="required">*</span></label>
-                            <textarea name="body" class="form-control" rows="4" placeholder="Write something nice...">{{ old('body') }}</textarea>
+                            <textarea name="body" class="form-control" rows="4" placeholder="Write something nice..." required>{{ old('body') }}</textarea>
                         </div>
                         <div class="col-md-12 mt-3">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-comment"></i> Submit</button>

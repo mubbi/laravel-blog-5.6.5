@@ -1,4 +1,9 @@
 $("#subscribe_form").submit(function(e) {
+
+    if ( $("#subscribe_form #email_id").val() == '' ) {
+        alert('Email Required');
+        return false;
+    }
     // Submit Ajax Request
     $.ajax({
         url: '$("#subscribe_form").attr("action")',

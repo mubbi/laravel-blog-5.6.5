@@ -27,5 +27,3 @@ $(function () {
         'placement': 'top'
     });
 });
-
-require('./subscriber-form');
