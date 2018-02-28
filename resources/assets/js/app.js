@@ -21,8 +21,11 @@ require('./bootstrap');
 //     el: '#app'
 // });
 
+// Enable Tooltip everywhere
 $(function () {
     $('[data-toggle="tooltip"]').tooltip({
         'placement': 'top'
     });
 });
+
+require('./subscriber-form');

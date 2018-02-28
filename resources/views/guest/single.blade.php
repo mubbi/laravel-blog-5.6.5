@@ -34,7 +34,6 @@
     </div>
 </div>
 
-
 @include('guest.partials.share-box')
 
 @include('guest.partials.author-box')
