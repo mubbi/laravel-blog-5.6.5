@@ -25,5 +25,6 @@ Route::get('subscribe/verify/{token}', 'Guest\HomeController@subscribeVerify');
 
 Route::get('feed', 'FeedsController@index');
 
+Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

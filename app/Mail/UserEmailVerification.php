@@ -7,20 +7,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailSubscriptionVerification extends Mailable
+class UserEmailVerification extends Mailable
 {
     use Queueable, SerializesModels;
-
-    protected $subscriber;
+    protected $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($subscriber)
+    public function __construct($user)
     {
-        $this->subscriber = $subscriber;
+        $this->user = $user;
     }
 
     /**
@@ -30,8 +29,6 @@ class EmailSubscriptionVerification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.subscription-confirmation', [
-            'email_token' => $this->subscriber->confirmation_token
-        ]);
+        return $this->view('emails.user-confirmation', ['email_token' => $this->user->confirmation_token]);
     }
 }

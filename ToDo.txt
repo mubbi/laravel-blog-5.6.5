@@ -3,40 +3,5 @@
 3. Categories List
 4. Category Blogs List - with pagination
 5. RSS Feeds
-
-
-
-
-blogs
-- id
-- title
-- slug
-- image
-- excerpt
-- description
-- views
-- user_id
-- is_active
-- timestamps
-
-Categories
-- name
-- slug
-
-comments
-- id
-- body
-- blog_id
-- user_id
-- is_active
-
-blog_category
-- category_id
-- blog_id
-
-blog_comment
-- blog_id
-- comment_id
-
-users
-- default laravel
+6. Subscribers
+7. Auto Email to all subscribers

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 150)->unique()->nullable(false);
             $table->string('password')->nullable(false);
             $table->string('confirmation_token')->nullable();
-            $table->tinyInteger('is_active')->default(0);
+            $table->tinyInteger('is_active')->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
