@@ -10,6 +10,7 @@ $factory->define(App\Blog::class, function (Faker $faker) {
         'excerpt' => $faker->text,
         'description' => $faker->paragraph,
         'views' => 0,
-        'is_active' => rand(0, 1)
+        'is_active' => rand(0, 1),
+        // 'user_id' => 1,
     ];
 });

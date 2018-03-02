@@ -36,4 +36,12 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Blog');
     }
+
+    /**
+     * Get the user record associated with the category.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

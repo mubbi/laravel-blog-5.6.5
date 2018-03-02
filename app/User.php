@@ -34,4 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Blog');
     }
+
+    /**
+     * Get the category record associated with the user.
+     */
+    public function category()
+    {
+        return $this->hasMany('App\Category');
+    }
 }
