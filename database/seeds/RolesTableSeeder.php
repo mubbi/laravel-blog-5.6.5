@@ -30,6 +30,10 @@ class RolesTableSeeder extends Seeder
             'description' => 'Permission to edit a blog'
         ]);
         Role::create([
+            'role' => 'delet_blog',
+            'description' => 'Permission to delet a blog'
+        ]);
+        Role::create([
             'role' => 'view_blog',
             'description' => 'Permission to view a blog'
         ]);
@@ -38,12 +42,28 @@ class RolesTableSeeder extends Seeder
             'description' => 'Permission to view all blogs'
         ]);
         Role::create([
+            'role' => 'view_all_comment',
+            'description' => 'Permission to view all comments'
+        ]);
+        Role::create([
+            'role' => 'view_comment',
+            'description' => 'Permission to Manage comments'
+        ]);
+        Role::create([
             'role' => 'moderate_comment',
             'description' => 'Permission to Manage comments'
         ]);
         Role::create([
             'role' => 'delet_comment',
             'description' => 'Permission to delet a comment'
+        ]);
+        Role::create([
+            'role' => 'view_user',
+            'description' => 'Permission to view a user'
+        ]);
+        Role::create([
+            'role' => 'view_all_user',
+            'description' => 'Permission to view all users'
         ]);
         Role::create([
             'role' => 'add_user',
@@ -59,6 +79,10 @@ class RolesTableSeeder extends Seeder
         ]);
         Role::create([
             'role' => 'manage_roles',
+            'description' => 'Permission to manage roles of a user'
+        ]);
+        Role::create([
+            'role' => 'manage_settings',
             'description' => 'Permission to manage roles of a user'
         ]);
     }
