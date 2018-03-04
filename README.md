@@ -1,14 +1,22 @@
 # Laravel Blog - v5.6.5
 This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
+(NOTE: Under Construction - On Going Development)
 # Features!
   - Blogs/Articles
   - Categories
   - Comments
   - Featured Image
   - Admin Area
+  - Role Based Access
   - RSS Feed
-  - Laravel Migrations
+  - Subscribers
   - SEO Friendly
+  - Social Friendly
+  - Automated Emails On Registration with Queue/Job
+  - Automated Emails on Subscriber with Queue/Job
+  - Automated Emails for newsletters with Queue/Job
+  - Laravel Migrations
+  - Simple & Minimal UI Design
 
 
 ### Tech
