@@ -31,20 +31,21 @@ Auth::routes();
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 
 // Admin Area
-Route::get('/home', 'HomeController@index')->name('home')->middleware('role:dashboard');
-
 Route::get('unauthorized', function () {
     return view('unauthorized');
 });
 
-Route::resource('admin/blogs', 'Admin\BlogsController');
-Route::resource('admin/comments', 'Admin\CommentsController', ['except' => [
-    'create', 'store'
-]]);
-Route::resource('admin/users', 'Admin\UsersController');
-Route::resource('admin/roles', 'Admin\RolesController', ['except' => [
-    'create', 'store', 'update', 'destroy', 'edit'
-]]);
-Route::resource('admin/settings', 'Admin\SettingsController', ['except' => [
-    'create', 'store', 'destroy'
-]]);
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:dashboard');
+    Route::resource('blogs', 'Admin\BlogsController');
+    Route::resource('comments', 'Admin\CommentsController', ['except' => [
+        'create', 'store'
+    ]]);
+    Route::resource('users', 'Admin\UsersController');
+    Route::resource('roles', 'Admin\RolesController', ['except' => [
+        'create', 'store', 'update', 'destroy', 'edit'
+    ]]);
+    Route::resource('settings', 'Admin\SettingsController', ['except' => [
+        'create', 'store', 'destroy'
+    ]]);
+});
