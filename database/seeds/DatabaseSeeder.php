@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         // Model::unguard();
         $this->call(
             // UsersTableSeeder::class,
-            SettingsTableSeeder::class
+            RolesTableSeeder::class
+            // SettingsTableSeeder::class
             // CategoriesTableSeeder::class,
             // BlogsTableSeeder::class,
         );

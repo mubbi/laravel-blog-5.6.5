@@ -27,4 +27,9 @@ Route::get('feed', 'FeedsController@index');
 
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('role:dashboard');
+
+Route::get('unauthorized', function () {
+    return view('unauthorized');
+});
