@@ -15,13 +15,13 @@ class BlogsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:view_all_blog', ['only' => ['index']]);
+        $this->middleware('role:view_all_blog', ['only' => ['index', 'blogsData', 'trashed', 'blogsAjaxTrashedData']]);
         $this->middleware('role:view_blog', ['only' => ['show']]);
 
         $this->middleware('role:add_blog', ['only' => ['create']]);
         $this->middleware('role:add_blog', ['only' => ['store']]);
 
-        $this->middleware('role:edit_blog', ['only' => ['edit']]);
+        $this->middleware('role:edit_blog', ['only' => ['edit', 'updateActiveStatus']]);
         $this->middleware('role:edit_blog', ['only' => ['update']]);
 
         $this->middleware('role:delet_blog', ['only' => ['destroy', 'restore', 'permanentDelet', 'emptyTrash']]);
