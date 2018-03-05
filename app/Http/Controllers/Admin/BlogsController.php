@@ -139,7 +139,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $authors = User::whereHas('roles', function ($query) {
+        $authors = User::active()->whereHas('roles', function ($query) {
             $query->where('role', '=', 'add_blog');
         })->get();
 
