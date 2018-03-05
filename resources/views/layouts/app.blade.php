@@ -43,11 +43,6 @@
                             <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a class="nav-link" href="{{ route('blogs.index') }}">Manage Blogs</a></li>
-                            <li><a class="nav-link" href="{{ route('comments.index') }}">Manage Comments</a></li>
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Roles</a></li>
-                            <li><a class="nav-link" href="{{ route('settings.index') }}">Manage Settings</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

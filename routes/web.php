@@ -41,6 +41,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('blogs', 'Admin\BlogsController');
     Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogsAjaxData');
 
+    Route::resource('categories', 'Admin\CategoriesController');
+    Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categoriesAjaxData');
+
     Route::resource('comments', 'Admin\CommentsController', ['except' => [
         'create', 'store'
     ]]);

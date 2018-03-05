@@ -44,6 +44,7 @@
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
                             <li><a class="nav-link" href="{{ route('blogs.index') }}">Manage Blogs</a></li>
+                            <li><a class="nav-link" href="{{ route('categories.index') }}">Manage Categories</a></li>
                             <li><a class="nav-link" href="{{ route('comments.index') }}">Manage Comments</a></li>
                             <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Roles</a></li>
