@@ -38,8 +38,13 @@ Route::get('unauthorized', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:dashboard');
 
+    Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogs.ajaxData');
+    Route::get('blogs/trashed', 'Admin\BlogsController@trashed')->name('blogs.trashedData');
+    Route::get('blogsTrashedData', 'Admin\BlogsController@blogsAjaxTrashedData')->name('blogs.ajaxTrashedData');
+    Route::get('blogs/restore/{id}', 'Admin\BlogsController@restore')->name('blogs.restore');
+    Route::get('blogs/delet/permanent/{id}', 'Admin\BlogsController@permanentDelet')->name('blogs.permanentDelet');
+
     Route::resource('blogs', 'Admin\BlogsController');
-    Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogsAjaxData');
 
     Route::resource('categories', 'Admin\CategoriesController');
     Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categoriesAjaxData');

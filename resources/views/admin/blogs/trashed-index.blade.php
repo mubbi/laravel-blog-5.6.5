@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Blogs - View All <a href="{{ route('blogs.trashedData') }}" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Trash Items <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="{{ route('blogs.create') }}" class="btn btn-primary float-right btn-sm mr-2"><i class="fas fa-plus"></i> Add</a></div>
+    <div class="card-header">Blogs - Trashed <a href="#" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Empty Trash <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="{{ route('blogs.index') }}" class="btn btn-light float-right btn-sm mr-2"><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
         <div class="table-responsive">
@@ -18,7 +18,7 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Created By</th>
-                        <th>Created On</th>
+                        <th>Trashed at</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                      <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Created By</th>
+                        <th>Trashed By</th>
                         <th>Created On</th>
                     </tr>
                 </tfoot>
@@ -66,15 +66,15 @@ $(document).ready(function() {
         processing: true,
         "language": {
             "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            "emptyTable": "No Blogs Found, Create the first blog."
+            "emptyTable": "Congrats Trash is empty."
         },
         serverSide: true,
-        ajax: '{!! route('blogs.ajaxData') !!}',
+        ajax: '{!! route('blogs.ajaxTrashedData') !!}',
         columns: [
             { data: 'id', name: 'blogs.id' },
             { data: 'title', name: 'blogs.title' },
             { data: 'users.name', name: 'users.name' },
-            { data: 'created_at', name: 'blogs.created_at' },
+            { data: 'trashed_at', name: 'blogs.deleted_at' },
             { data: 'actions', name: 'actions' }
         ],
         "order": [[ 3, "desc" ]],
