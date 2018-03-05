@@ -81,6 +81,7 @@ $(document).ready(function() {
         placeholder: "Choose Categories...",
         minimumInputLength: 2,
         delay : 200,
+        tokenSeparators: [',','.'],
         ajax: {
             url: '{{ route("categories.ajaxSelectData") }}',
             dataType: 'json',
