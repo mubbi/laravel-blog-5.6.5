@@ -33,7 +33,8 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        return view('admin/blogs/index');
+        $trashed_items = Blog::onlyTrashed()->count();
+        return view('admin/blogs/index', ['trashed_items_count' => $trashed_items]);
     }
 
     /**

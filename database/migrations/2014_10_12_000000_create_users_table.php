@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('is_active')->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -25,6 +25,7 @@ class CreateBlogsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

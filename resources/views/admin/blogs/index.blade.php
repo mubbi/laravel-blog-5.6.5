@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Blogs <a href="#" class="btn btn-primary float-right btn-sm">Add</a></div>
+    <div class="card-header">Blogs <a href="#" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Trash Items <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="#" class="btn btn-primary float-right btn-sm mr-2"><i class="fas fa-plus"></i> Add</a></div>
 
     <div class="card-body">
         <div class="table-responsive">
@@ -59,7 +59,10 @@
 $(document).ready(function() {
     $('#dataTable').DataTable({
         processing: true,
-        "language": { processing: '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '},
+        "language": {
+            "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+            "emptyTable": "No Blogs Found, Create the first blog."
+        },
         serverSide: true,
         ajax: '{!! route('blogsAjaxData') !!}',
         columns: [
@@ -101,15 +104,15 @@ $(document).ready(function() {
                 buttons: [
                     {
                         extend: 'csv',
-                        text: 'CSV all',
+                        text: 'As CSV',
                     },
                     {
                         extend: 'excel',
-                        text: 'Excel all',
+                        text: 'As Excel',
                     },
                     {
                         extend: 'pdf',
-                        text: 'PDF all',
+                        text: 'As PDF',
                     },
                 ]
             },
