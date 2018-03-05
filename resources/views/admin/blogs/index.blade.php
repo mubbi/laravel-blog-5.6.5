@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Blogs <a href="#" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Trash Items <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="#" class="btn btn-primary float-right btn-sm mr-2"><i class="fas fa-plus"></i> Add</a></div>
+    <div class="card-header">Blogs <a href="#" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Trash Items <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="{{ route('blogs.create') }}" class="btn btn-primary float-right btn-sm mr-2"><i class="fas fa-plus"></i> Add</a></div>
 
     <div class="card-body">
         <div class="table-responsive">

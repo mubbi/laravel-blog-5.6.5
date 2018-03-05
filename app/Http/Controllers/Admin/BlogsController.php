@@ -48,12 +48,11 @@ class BlogsController extends Controller
                         ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.created_at']);
 
         return Datatables::of($blogs)
-                ->editColumn('title', '{!! str_limit($title, 60) !!}')
                 ->editColumn('created_at', function ($model) {
                     return $model->created_at->format('F d, Y h:i A');
                 })
                 ->editColumn('users.name', function ($model) {
-                    return '<a href="view#'.$model->user_id.'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
+                    return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
                 })
                 ->addColumn('actions', function ($model) {
                     return '
@@ -62,8 +61,8 @@ class BlogsController extends Controller
                         Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.$model->id.'"><i class="fas fa-eye"></i> View</a>
-                            <a class="dropdown-item" href="'.$model->id.'"><i class="fas fa-edit"></i> Edit</a>
+                            <a class="dropdown-item" href="'.route('blogs.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
+                            <a class="dropdown-item" href="'.route('blogs.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
                             <a class="dropdown-item text-danger" href="'.$model->id.'"><i class="fas fa-trash"></i> Delet</a>
                         </div>
                     </div>';
@@ -79,7 +78,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/blogs/create');
     }
 
     /**
