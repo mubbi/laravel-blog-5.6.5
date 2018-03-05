@@ -19,6 +19,7 @@
                         <th>Title</th>
                         <th>Created By</th>
                         <th>Created On</th>
+                        <th>Published</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                         <th>Title</th>
                         <th>Created By</th>
                         <th>Created On</th>
+                        <th>Published</th>
                     </tr>
                 </tfoot>
             </table>
@@ -75,11 +77,12 @@ $(document).ready(function() {
             { data: 'title', name: 'blogs.title' },
             { data: 'users.name', name: 'users.name' },
             { data: 'created_at', name: 'blogs.created_at' },
+            { data: 'is_active', name: 'blogs.is_active' },
             { data: 'actions', name: 'actions' }
         ],
         "order": [[ 3, "desc" ]],
         "columnDefs": [
-            { orderable: false, targets: 4 }
+            { orderable: false, targets: 5 }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         initComplete: function () {

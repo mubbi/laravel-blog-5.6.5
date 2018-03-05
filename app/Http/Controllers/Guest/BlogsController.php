@@ -68,10 +68,10 @@ class BlogsController extends Controller
                 $comment->save();
 
                 // Redirect back with success
-                return back()->with('success', 'Your comment added successfully');
+                return back()->with('custom_success', 'Your comment added successfully');
             }
         }
         // Redirect back with error
-        return back()->withInput()->with('errors', 'Unable to add comment');
+        return back()->withInput()->with('custom_errors', 'Unable to add comment');
     }
 }

@@ -43,11 +43,14 @@ Route::prefix('admin')->group(function () {
     Route::get('blogsTrashedData', 'Admin\BlogsController@blogsAjaxTrashedData')->name('blogs.ajaxTrashedData');
     Route::get('blogs/restore/{id}', 'Admin\BlogsController@restore')->name('blogs.restore');
     Route::get('blogs/delet/permanent/{id}', 'Admin\BlogsController@permanentDelet')->name('blogs.permanentDelet');
+    Route::get('blogs/trash/empty', 'Admin\BlogsController@emptyTrash')->name('blogs.emptyTrash');
+    Route::get('blogs/publish/status{id}', 'Admin\BlogsController@updateActiveStatus')->name('blogs.publishStatus');
 
     Route::resource('blogs', 'Admin\BlogsController');
 
+    Route::get('categories/ajax-select', 'Admin\CategoriesController@categoriesAjaxSelectData')->name('categories.ajaxSelectData');
+    Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categories.ajaxData');
     Route::resource('categories', 'Admin\CategoriesController');
-    Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categoriesAjaxData');
 
     Route::resource('comments', 'Admin\CommentsController', ['except' => [
         'create', 'store'

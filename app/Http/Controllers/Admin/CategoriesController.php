@@ -44,6 +44,46 @@ class CategoriesController extends Controller
     }
 
     /**
+     * Select2 categories - Process select2 ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function categoriesAjaxSelectData(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $resultCount = 10;
+
+            $offset = ($page - 1) * $resultCount;
+
+            $categories = Category::where('name', 'LIKE', '%' . $request->term. '%')
+                                    ->orderBy('name')
+                                    ->skip($offset)
+                                    ->take($resultCount)
+                                    ->selectRaw('id, name as text')
+                                    ->get();
+
+            $count = Count(Category::where('name', 'LIKE', '%' . $request->term. '%')
+                                    ->orderBy('name')
+                                    ->selectRaw('id, name as text')
+                                    ->get());
+
+            $endCount = $offset + $resultCount;
+            $morePages = $count > $endCount;
+
+            $results = array(
+                  "results" => $categories,
+                  "pagination" => array(
+                      "more" => $morePages
+                  )
+              );
+
+            return response()->json($results);
+        }
+        return response()->json('oops');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id

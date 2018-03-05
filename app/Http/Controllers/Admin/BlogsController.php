@@ -23,7 +23,7 @@ class BlogsController extends Controller
         $this->middleware('role:edit_blog', ['only' => ['edit']]);
         $this->middleware('role:edit_blog', ['only' => ['update']]);
 
-        $this->middleware('role:delet_blog', ['only' => ['destroy']]);
+        $this->middleware('role:delet_blog', ['only' => ['destroy', 'restore', 'permanentDelet', 'emptyTrash']]);
     }
 
     /**
@@ -45,16 +45,28 @@ class BlogsController extends Controller
     public function blogsData()
     {
         $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
-                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.created_at']);
+                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'blogs.is_active', 'users.name', 'blogs.created_at']);
 
         return Datatables::of($blogs)
                 ->editColumn('created_at', function ($model) {
                     return $model->created_at->format('F d, Y h:i A');
                 })
+                ->editColumn('is_active', function ($model) {
+                    if ($model->is_active == 0) {
+                        return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
+                    } else {
+                        return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
+                    }
+                })
                 ->editColumn('users.name', function ($model) {
                     return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
                 })
                 ->addColumn('actions', function ($model) {
+                    if ($model->is_active == 0) {
+                        $publish_action = '<a class="dropdown-item" href="'.route('blogs.publishStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Publish</a>';
+                    } else {
+                        $publish_action = '<a class="dropdown-item" href="'.route('blogs.publishStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Unpublish</a>';
+                    }
                     return '
                      <div class="dropdown float-right">
                         <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,11 +75,12 @@ class BlogsController extends Controller
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="'.route('blogs.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
                             <a class="dropdown-item" href="'.route('blogs.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
+                            '.$publish_action.'
                             <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'blogs\');"><i class="fas fa-trash"></i> Delet</a>
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','users.name'])
+                ->rawColumns(['actions','users.name','is_active'])
                 ->make(true);
     }
 
@@ -109,7 +122,7 @@ class BlogsController extends Controller
                         Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('blogs.restore', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-eye"></i> Restore</a>
+                            <a class="dropdown-item" href="'.route('blogs.restore', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
                             <a class="dropdown-item text-danger" href="'.route('blogs.permanentDelet', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-trash"></i> Permanent Delet</a>
                         </div>
                     </div>';
@@ -147,7 +160,8 @@ class BlogsController extends Controller
      */
     public function show($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return view('admin/blogs/show', ['blog' => $blog]);
     }
 
     /**
@@ -158,7 +172,8 @@ class BlogsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return view('admin/blogs/edit', ['blog' => $blog]);
     }
 
     /**
@@ -171,6 +186,33 @@ class BlogsController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Update the is active status of specified resource in storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateActiveStatus($id)
+    {
+        // get all trashed blogs and permanent Delet the blogs
+        $blog = Blog::findOrFail($id);
+
+        if ($blog->is_active == 0) {
+            $blog->is_active = 1;
+        } else {
+            $blog->is_active = 0;
+        }
+        $status = $blog->save();
+
+        if ($status) {
+            // If success
+            return back()->with('custom_success', 'Blog publish status updated.');
+        } else {
+            // If no success
+            return back()->with('custom_errors', 'Failed to change publish status. Something went wrong.');
+        }
     }
 
     /**
@@ -189,10 +231,10 @@ class BlogsController extends Controller
 
         if ($blog->trashed()) {
             // If success
-            return back()->with('success', 'Blog has been deleted and transfered to trash items.');
+            return back()->with('custom_success', 'Blog has been deleted and transfered to trash items.');
         } else {
             // If no success
-            return back()->with('errors', 'Blog was not deleted. Something went wrong.');
+            return back()->with('custom_errors', 'Blog was not deleted. Something went wrong.');
         }
     }
 
@@ -212,10 +254,10 @@ class BlogsController extends Controller
 
         if (!$blog->trashed()) {
             // If success
-            return back()->with('success', 'Blog has been restored.');
+            return back()->with('custom_success', 'Blog has been restored.');
         } else {
             // If no success
-            return back()->with('errors', 'Blog was not able to restore. Something went wrong.');
+            return back()->with('custom_errors', 'Blog was not able to restore. Something went wrong.');
         }
     }
 
@@ -235,10 +277,30 @@ class BlogsController extends Controller
 
         if ($status) {
             // If success
-            return back()->with('success', 'Blog has been deleted permanently.');
+            return back()->with('custom_success', 'Blog has been deleted permanently.');
         } else {
             // If no success
-            return back()->with('errors', 'Blog was not able to deleted permanently. Something went wrong.');
+            return back()->with('custom_errors', 'Blog was not able to deleted permanently. Something went wrong.');
+        }
+    }
+
+    /**
+     * permanent delet all trashed items in the specified resource from trashed storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function emptyTrash()
+    {
+        // get all trashed blogs and permanent Delet the blogs
+        $status = Blog::whereNotNull('deleted_at')->onlyTrashed()->forceDelete();
+
+        if ($status) {
+            // If success
+            return back()->with('custom_success', 'Trash has been emptied.');
+        } else {
+            // If no success
+            return back()->with('custom_errors', 'Failed to empty trash. Something went wrong.');
         }
     }
 }
