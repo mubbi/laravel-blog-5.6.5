@@ -24,8 +24,10 @@ This blog project uses open source projects to work properly:
 * Twitter Bootstrap 4 - great UI boilerplate for modern web apps
 * Laravel 5.6.5 - Framework for Web Artisans
 * jQuery - duh
+* DataTable - Easily Manage Data sets for management purpose using jquery
 * Sluggable - make slugs easily in laravel
 * Roumen Feed - make RSS Feed easily in laravel
+* Yajra Laravel Datatables - Easily integrat DataTable backend for laravel
 
 And of course blog project itself is open source with a public repository on GitHub.
 
