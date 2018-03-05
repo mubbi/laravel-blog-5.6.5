@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Blog;
-use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
@@ -139,8 +139,10 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $role_users = Role::with('users')->where('role', 'add_blog')->first();
-        $authors = $role_users->users()->active()->get();
+        $authors = User::whereHas('roles', function ($query) {
+            $query->where('role', '=', 'add_blog');
+        })->get();
+
         return view('admin/blogs/create', ['authors' => $authors]);
     }
 
