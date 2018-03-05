@@ -59,6 +59,7 @@
 $(document).ready(function() {
     $('#dataTable').DataTable({
         processing: true,
+        "language": { processing: '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '},
         serverSide: true,
         ajax: '{!! route('blogsAjaxData') !!}',
         columns: [
