@@ -42,6 +42,26 @@ class RolesTableSeeder extends Seeder
             'description' => 'Permission to view all blogs'
         ]);
         Role::create([
+            'role' => 'add_category',
+            'description' => 'Permission to create a category'
+        ]);
+        Role::create([
+            'role' => 'edit_category',
+            'description' => 'Permission to edit a category'
+        ]);
+        Role::create([
+            'role' => 'delet_category',
+            'description' => 'Permission to delet a category'
+        ]);
+        Role::create([
+            'role' => 'view_category',
+            'description' => 'Permission to view a category'
+        ]);
+        Role::create([
+            'role' => 'view_all_category',
+            'description' => 'Permission to view all categories'
+        ]);
+        Role::create([
             'role' => 'view_all_comment',
             'description' => 'Permission to view all comments'
         ]);
