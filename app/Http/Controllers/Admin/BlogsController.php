@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Blog;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 
 class BlogsController extends Controller
@@ -32,6 +34,16 @@ class BlogsController extends Controller
     public function index()
     {
         return view('admin/blogs/index');
+    }
+
+    /**
+     * index blogs - Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function blogsData()
+    {
+        return Datatables::of(Blog::query())->make(true);
     }
 
     /**

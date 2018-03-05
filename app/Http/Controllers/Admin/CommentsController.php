@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Comment;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 
 class CommentsController extends Controller
@@ -29,6 +31,16 @@ class CommentsController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * index comments - Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function commentsData()
+    {
+        return Datatables::of(Comment::query())->make(true);
     }
 
     /**

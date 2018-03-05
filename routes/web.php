@@ -37,15 +37,25 @@ Route::get('unauthorized', function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:dashboard');
+
     Route::resource('blogs', 'Admin\BlogsController');
+    Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogsAjaxData');
+
     Route::resource('comments', 'Admin\CommentsController', ['except' => [
         'create', 'store'
     ]]);
+    Route::get('commentsData', 'Admin\CommentsController@commentsData')->name('commentsAjaxData');
+
     Route::resource('users', 'Admin\UsersController');
+    Route::get('usersData', 'Admin\UsersController@usersData')->name('usersAjaxData');
+
     Route::resource('roles', 'Admin\RolesController', ['except' => [
         'create', 'store', 'update', 'destroy', 'edit'
     ]]);
+    Route::get('rolesData', 'Admin\RolesController@rolesData')->name('rolesAjaxData');
+
     Route::resource('settings', 'Admin\SettingsController', ['except' => [
         'create', 'store', 'destroy'
     ]]);
+    Route::get('settingsData', 'Admin\SettingsController@settingsData')->name('settingsAjaxData');
 });

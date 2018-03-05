@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -32,6 +34,16 @@ class UsersController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * index users - Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function usersData()
+    {
+        return Datatables::of(User::query())->make(true);
     }
 
     /**

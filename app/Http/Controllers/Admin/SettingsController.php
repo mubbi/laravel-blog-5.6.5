@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Setting;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
@@ -23,6 +25,16 @@ class SettingsController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * index settings - Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function settingsData()
+    {
+        return Datatables::of(Setting::query())->make(true);
     }
 
     /**

@@ -15,6 +15,9 @@
 
     <!-- FontAwesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    @yield('custom_css')
+
 </head>
 <body>
     <div id="app">
@@ -93,5 +96,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('custom_js')
+
 </body>
 </html>
