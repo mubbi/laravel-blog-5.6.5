@@ -26,10 +26,10 @@
                 </tbody>
                 <tfoot>
                      <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Trashed By</th>
-                        <th>Created On</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>

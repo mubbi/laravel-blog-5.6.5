@@ -27,11 +27,11 @@
                 </tbody>
                 <tfoot>
                      <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Created By</th>
-                        <th>Created On</th>
-                        <th>Published</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>

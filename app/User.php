@@ -37,6 +37,16 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     /**
+     * Custome scope for Active Users.
+     *
+     * @return string
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    /**
      * Get the blogs record associated with the user.
      */
     public function blog()
