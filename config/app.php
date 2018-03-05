@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Roumen\Feed\FeedServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -211,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // Package Providers
         'Feed' => Roumen\Feed\Feed::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 
