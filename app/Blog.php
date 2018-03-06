@@ -19,6 +19,15 @@ class Blog extends Model
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'slug', 'image', 'excerpt', 'description', 'views', 'user_id', 'is_active', 'allow_comments'
+    ];
+
     public function sluggable()
     {
         return [
