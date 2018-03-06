@@ -137,7 +137,10 @@ $(document).ready(function() {
             {
                 extend: 'copy',
                 text: '<i class="fas fa-copy"></i> Copy All',
-                className: 'btn btn-sm btn-secondary'
+                className: 'btn btn-sm btn-secondary',
+                exportOptions: {
+                    columns: ':visible'
+                }
             },
             {
                 extend: 'collection',
@@ -147,21 +150,33 @@ $(document).ready(function() {
                     {
                         extend: 'csv',
                         text: 'As CSV',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'excel',
                         text: 'As Excel',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'pdf',
                         text: 'As PDF',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                 ]
             },
             {
                 extend: 'print',
                 text: '<i class="fas fa-print"></i> Print all',
-                className: 'btn btn-sm btn-secondary'
+                className: 'btn btn-sm btn-secondary',
+                exportOptions: {
+                    columns: ':visible'
+                }
             },
             {
                 extend: 'colvis',
@@ -170,7 +185,7 @@ $(document).ready(function() {
                 columnText: function ( dt, idx, title ) {
                     if (idx == 0) {
                         return 'Bulk Action';
-                    } else if (idx == 6) {
+                    } else if (idx == 5) {
                         return 'Actions';
                     } else {
                         return title;
