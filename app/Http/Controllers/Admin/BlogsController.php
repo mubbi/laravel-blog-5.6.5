@@ -53,7 +53,7 @@ class BlogsController extends Controller
 
         return Datatables::of($blogs)
                 ->editColumn('created_at', function ($model) {
-                    return $model->created_at->format('F d, Y h:i A');
+                    return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
                 })
                 ->editColumn('is_active', function ($model) {
                     if ($model->is_active == 0) {
@@ -65,6 +65,7 @@ class BlogsController extends Controller
                 ->editColumn('users.name', function ($model) {
                     return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
                 })
+                ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
                     if ($model->is_active == 0) {
                         $publish_action = '<a class="dropdown-item" href="'.route('blogs.publishStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Publish</a>';
@@ -74,17 +75,17 @@ class BlogsController extends Controller
                     return '
                      <div class="dropdown float-right">
                         <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
+                        <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="'.route('blogs.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
                             <a class="dropdown-item" href="'.route('blogs.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
                             '.$publish_action.'
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'blogs\');"><i class="fas fa-trash"></i> Delet</a>
+                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'blogs\');"><i class="fas fa-trash"></i> Trash</a>
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','users.name','is_active'])
+                ->rawColumns(['actions','users.name','is_active','bulkAction','created_at'])
                 ->make(true);
     }
 
@@ -119,6 +120,7 @@ class BlogsController extends Controller
                 ->editColumn('users.name', function ($model) {
                     return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
                 })
+                ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
                     return '
                      <div class="dropdown float-right">
@@ -131,7 +133,7 @@ class BlogsController extends Controller
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','users.name'])
+                ->rawColumns(['actions','users.name','bulkAction'])
                 ->make(true);
     }
 
@@ -287,6 +289,25 @@ class BlogsController extends Controller
     }
 
     /**
+     * Bulk trash items in the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkTrash(Request $request)
+    {
+        $arrId = explode(",", $request->ids);
+        $status = Blog::destroy($arrId);
+
+        if ($status) {
+            // If success
+            return back()->with('custom_success', 'Bulk Trash action completed.');
+        } else {
+            // If no success
+            return back()->with('custom_errors', 'Bulk Trash action failed. Something went wrong.');
+        }
+    }
+
+    /**
      * Restore the specified resource from trashed storage.
      *
      * @param  int  $id
@@ -310,6 +331,25 @@ class BlogsController extends Controller
     }
 
     /**
+     * Bulk Restore items in the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkRestore(Request $request)
+    {
+        $arrId = explode(",", $request->ids);
+        $status = Blog::onlyTrashed()->restore($arrId);
+
+        if ($status) {
+            // If success
+            return back()->with('custom_success', 'Bulk Restore action completed.');
+        } else {
+            // If no success
+            return back()->with('custom_errors', 'Bulk Restore action failed. Something went wrong.');
+        }
+    }
+
+    /**
      * Permanent Delet the specified resource from trashed storage.
      *
      * @param  int  $id
@@ -321,7 +361,7 @@ class BlogsController extends Controller
         $blog = Blog::onlyTrashed()->findOrFail($id);
 
         // Permanent Delet the blog
-        $status =$blog->forceDelete();
+        $status = $blog->forceDelete();
 
         if ($status) {
             // If success

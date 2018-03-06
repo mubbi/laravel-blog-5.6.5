@@ -8,24 +8,27 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Blogs - Trashed <a href="{{ route('blogs.emptyTrash') }}" class="btn btn-danger float-right btn-sm"> <i class="fas fa-trash"></i> Empty Trash <span class="badge badge-light">{{ $trashed_items_count }}</span></a> <a href="{{ route('blogs.index') }}" class="btn btn-light float-right btn-sm mr-2"><i class="fas fa-chevron-left"></i> Go Back</a></div>
+    <div class="card-header">Blogs - Trashed <a href="{{ route('blogs.index') }}" class="btn btn-light float-right btn-sm mr-2"><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
         <div class="table-responsive">
             <table id="dataTable" class="table table-striped table-hover table-bordered" width="100%">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" id="bulk_selector"></th>
                         <th>ID</th>
                         <th>Title</th>
                         <th>Created By</th>
                         <th>Trashed at</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
                 <tfoot>
                      <tr>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -62,45 +65,83 @@ $(document).ready(function() {
         processing: true,
         "language": {
             "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            "emptyTable": "Congrats Trash is empty."
+            "emptyTable": "Congrats Trash is empty.",
+            "oPaginate": {
+                sNext: 'Next <i class="fas fa-chevron-right"></i>',
+                sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
+                sFirst: '<i class="fas fa-backward"></i> First',
+                sLast: 'Last <i class="fas fa-forward"></i>'
+            },
         },
         serverSide: true,
         ajax: '{!! route('blogs.ajaxTrashedData') !!}',
         columns: [
+            { data: 'bulkAction', name: 'bulkAction' },
             { data: 'id', name: 'blogs.id' },
             { data: 'title', name: 'blogs.title' },
             { data: 'users.name', name: 'users.name' },
             { data: 'trashed_at', name: 'blogs.deleted_at' },
             { data: 'actions', name: 'actions' }
         ],
-        "order": [[ 3, "desc" ]],
+        "order": [[ 4, "desc" ]],
         "columnDefs": [
-            { orderable: false, targets: 4 }
+            { orderable: false, targets: [0,5] }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         initComplete: function () {
             this.api().columns().every(function () {
                 var column = this;
-                var input = document.createElement("input");
-                input.className = 'form-control form-control-sm';
-                $(input).appendTo($(column.footer()).empty())
-                .on('change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                    column.search(val ? val : '', true, false).draw();
-                });
+                if (column[0][0] !== 0 && column[0][0] !== 5) {
+                    var input = document.createElement("input");
+                    input.className = 'form-control form-control-sm';
+                    $(input).appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        column.search(val ? val : '', true, false).draw();
+                    });
+                }
             });
         },
         "pagingType": "full_numbers",
         "deferRender": true,
         buttons: [
             {
+                text: '<i class="fas fa-trash"></i> Empty Trash <span class="badge badge-light">{{ $trashed_items_count }}</span>',
+                className: 'btn btn-sm btn-danger',
+                action: function ( e, dt, node, config ) {
+                    if (confirm('Are you sure?')) {
+                        window.location.href = '{{ route("blogs.emptyTrash") }}';
+                    }
+                },
+                init: function (dt, node, config) {
+                    $(node).attr('id', 'bulkEmptyButton');
+                }
+            },
+            {
+                text: '<i class="fas fa-history"></i> Bulk Restore',
+                className: 'btn btn-sm btn-success disabled',
+                action: function ( e, dt, node, config ) {
+                    if (confirm('Are you sure?')) {
+                        var bulkValuesStr = '';
+                        $('[name="selected_ids[]"]:checked').each(function(){
+                            bulkValuesStr += $(this).val()+',';
+                        });
+                        var selectedIds = bulkValuesStr.slice(0,-1);
+                        window.location.href = '{{ route("blogs.bulkRestore") }}?ids=' + selectedIds;
+                    }
+                },
+                init: function (dt, node, config) {
+                    $(node).attr('id', 'bulkRestoreButton');
+                }
+            },
+            {
                 extend: 'copy',
-                text: 'Copy All',
+                text: '<i class="fas fa-copy"></i> Copy All',
                 className: 'btn btn-sm btn-secondary'
             },
             {
                 extend: 'collection',
-                text: 'Export Data',
+                text: '<i class="fas fa-download"></i> Export Data',
                 className: 'btn btn-sm btn-secondary',
                 buttons: [
                     {
@@ -119,18 +160,47 @@ $(document).ready(function() {
             },
             {
                 extend: 'print',
-                text: 'Print all',
+                text: '<i class="fas fa-print"></i> Print all',
                 className: 'btn btn-sm btn-secondary'
             },
             {
                 extend: 'colvis',
-                text: 'Show/Hide Columns',
-                className: 'btn btn-sm btn-secondary'
+                text: '<i class="far fa-eye-slash"></i> Show/Hide Columns',
+                className: 'btn btn-sm btn-secondary',
+                columnText: function ( dt, idx, title ) {
+                    if (idx == 0) {
+                        return 'Bulk Action';
+                    } else if (idx == 6) {
+                        return 'Actions';
+                    } else {
+                        return title;
+                    }
+                }
             },
         ],
         dom: 'lBfrtip',
     });
     $('.dt-buttons button, .dt-button-collection button').removeClass('dt-button');
+
+    // Bulk Selector
+    $('#bulk_selector').click(function() {
+        $('[name="selected_ids[]"]').prop('checked', $(this).is(':checked'));
+        toggleBulkBtnClass();
+    });
+
+    // Bulk Button Handler
+    $(document).on('click', '[name="selected_ids[]"]', function() {
+       toggleBulkBtnClass();
+    });
 });
+
+// Toggle Bulk Delet Button Class
+function toggleBulkBtnClass() {
+    if ($('[name="selected_ids[]"]').is(':checked')) {
+        $('#bulkRestoreButton').removeClass('disabled');
+    } else {
+        $('#bulkRestoreButton').addClass('disabled');
+    }
+}
 </script>
 @endsection

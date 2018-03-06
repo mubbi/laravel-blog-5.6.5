@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:dashboard');
 
     Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogs.ajaxData');
+    Route::get('blogs/bulk/trash', 'Admin\BlogsController@bulkTrash')->name('blogs.bulkTrash');
+    Route::get('blogs/bulk/restore', 'Admin\BlogsController@bulkRestore')->name('blogs.bulkRestore');
     Route::get('blogs/trashed', 'Admin\BlogsController@trashed')->name('blogs.trashedData');
     Route::get('blogsTrashedData', 'Admin\BlogsController@blogsAjaxTrashedData')->name('blogs.ajaxTrashedData');
     Route::get('blogs/restore/{id}', 'Admin\BlogsController@restore')->name('blogs.restore');

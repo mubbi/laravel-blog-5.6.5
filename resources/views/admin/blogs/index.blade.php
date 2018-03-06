@@ -28,13 +28,13 @@
                 </tbody>
                 <tfoot>
                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
@@ -116,15 +116,17 @@ $(document).ready(function() {
                 text: '<i class="fas fa-trash"></i> Bulk Trash',
                 className: 'btn btn-sm btn-danger disabled',
                 action: function ( e, dt, node, config ) {
-                    var bulkValuesArr = [];
-                    $('[name="selected_ids[]"]:checked').each(function(){
-                        bulkValuesArr.push($(this).val());
-                    });;
-                    alert( 'Bulk Trash Button activated and values are in array lets do the magic');
+                    if (confirm('Are you sure?')) {
+                        var bulkValuesStr = '';
+                        $('[name="selected_ids[]"]:checked').each(function(){
+                            bulkValuesStr += $(this).val()+',';
+                        });
+                        var selectedIds = bulkValuesStr.slice(0,-1);
+                        window.location.href = '{{ route("blogs.bulkTrash") }}?ids=' + selectedIds;
+                    }
                 },
                 init: function (dt, node, config) {
                     $(node).attr('id', 'bulkDeleteButton');
-                    $(node).append('<i class="fas fa-info></i>"');
                 }
             },
             {
