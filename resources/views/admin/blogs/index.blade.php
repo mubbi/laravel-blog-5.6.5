@@ -75,8 +75,8 @@ $(document).ready(function() {
             "oPaginate": {
                 sNext: 'Next <i class="fas fa-chevron-right"></i>',
                 sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
-                sFirst: '<i class="fas fa-backward"></i> First',
-                sLast: 'Last <i class="fas fa-forward"></i>'
+                sFirst: '<i class="fas fa-step-backward"></i> First',
+                sLast: 'Last <i class="fas fa-step-forward"></i>'
             },
         },
         serverSide: true,
