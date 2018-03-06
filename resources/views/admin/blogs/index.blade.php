@@ -139,14 +139,13 @@ $(document).ready(function() {
     });
     $('.dt-buttons button, .dt-button-collection button').removeClass('dt-button');
 });
-</script>
 
-<script>
-    function callDeletItem(id, model) {
-        if (confirm('Are you sure?')) {
-            $("#deletItemForm").attr('action', '{{ url("admin") }}/'+ model + '/' + id);
-            $("#deletItemForm").submit();
-        }
+// Admin helpers
+function callDeletItem(id, model) {
+    if (confirm('Are you sure?')) {
+        $("#deletItemForm").attr('action', base_url + '/admin/'+ model + '/' + id);
+        $("#deletItemForm").submit();
     }
+}
 </script>
 @endsection

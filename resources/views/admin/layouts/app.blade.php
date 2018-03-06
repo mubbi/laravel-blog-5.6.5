@@ -93,6 +93,9 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        var base_url = "{{ url('') }}";
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('custom_js')

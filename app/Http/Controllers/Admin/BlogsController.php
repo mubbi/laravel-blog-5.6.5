@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Blog;
 use App\User;
+use App\Category;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreBlogPost;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class BlogsController extends Controller
 {
@@ -18,11 +23,9 @@ class BlogsController extends Controller
         $this->middleware('role:view_all_blog', ['only' => ['index', 'blogsData', 'trashed', 'blogsAjaxTrashedData']]);
         $this->middleware('role:view_blog', ['only' => ['show']]);
 
-        $this->middleware('role:add_blog', ['only' => ['create']]);
-        $this->middleware('role:add_blog', ['only' => ['store']]);
+        $this->middleware('role:add_blog', ['only' => ['create','store']]);
 
-        $this->middleware('role:edit_blog', ['only' => ['edit', 'updateActiveStatus']]);
-        $this->middleware('role:edit_blog', ['only' => ['update']]);
+        $this->middleware('role:edit_blog', ['only' => ['update', 'edit', 'updateActiveStatus']]);
 
         $this->middleware('role:delet_blog', ['only' => ['destroy', 'restore', 'permanentDelet', 'emptyTrash']]);
     }
@@ -152,9 +155,46 @@ class BlogsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        //
+        // Pre Validations are done in StoreBlogPost Request
+        // Store the item
+
+        // Store File & Get Path
+        $imagePath = Storage::putFile('images', $request->file('image'));
+
+        // Store & Get Categories
+        $categoryArr = array();
+        foreach ($request->categories as $category) {
+            if (is_numeric($category)) {
+                // Store in array
+                $categoryArr[] = $category;
+            } else {
+                // if the item not numeric that means that its new item and we should create it
+                // User Id will automatically set by mutator in Category model
+                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
+                // include the new item to array
+                $categoryArr[] = $newCategory->id;
+            }
+        }
+
+        // Step 1 - Init item Obj
+        $blog = new Blog;
+
+        // Set items fields
+        $blog->title = $request->title;
+        $blog->excerpt = $request->excerpt;
+        $blog->description = $request->description;
+        $blog->image = $imagePath;
+        $blog->user_id = $request->user_id;
+        $blog->is_active = $request->is_active;
+        $blog->allow_comments = $request->allow_comments;
+
+        // Step 2 - Save Item
+        $blog->save();
+
+        // Step 3 - Attach/Sync Related Items
+        $blog->categories()->sync($categoryArr);
     }
 
     /**

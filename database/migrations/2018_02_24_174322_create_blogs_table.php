@@ -20,7 +20,7 @@ class CreateBlogsTable extends Migration
             $table->string('image');
             $table->text('excerpt')->nullable(false);
             $table->longText('description')->nullable(false);
-            $table->integer('views')->unsigned()->default(0);
+            $table->integer('views')->unsigned()->default(1);
             $table->integer('user_id')->unsigned()->nullable(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->tinyInteger('is_active')->unsigned()->default(0);

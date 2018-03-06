@@ -37,10 +37,6 @@
     </div>
 </div>
 
-<form action="#" method="post" id="deletItemForm" display: none;>
-    @csrf
-    {{ method_field('DELETE') }}
-</form>
 @endsection
 
 @section('custom_js')
@@ -136,14 +132,5 @@ $(document).ready(function() {
     });
     $('.dt-buttons button, .dt-button-collection button').removeClass('dt-button');
 });
-</script>
-
-<script>
-    function callDeletItem(id, model) {
-        if (confirm('Are you sure?')) {
-            $("#deletItemForm").attr('action', '{{ url("admin") }}/'+ model + '/' + id);
-            $("#deletItemForm").submit();
-        }
-    }
 </script>
 @endsection
