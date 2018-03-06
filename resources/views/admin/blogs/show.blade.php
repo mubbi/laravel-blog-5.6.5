@@ -8,24 +8,52 @@
     <div class="card-header">Blogs - View <a href="{{ route('blogs.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
-        {{ $blog->id }}
-        {{ $blog->title }}
-        {{ $blog->slug }}
-        {{ $blog->image }}
-        {{ $blog->excerpt }}
-        {{ $blog->description }}
-        {{ $blog->views }}
-        {{ $blog->user_id }}
-        {{ $blog->is_active }}
-        {{ $blog->allow_comments }}
-        {{ $blog->created_at }}
-        {{ $blog->updated_at }}
-        {{ $blog->deleted_at }}
-
-        @foreach($blog->categories as $category)
-        {{ $category->name }}
-        @endforeach
-
+        <div class="row">
+            <div class="col-md-12">
+                <p><b>ID:</b> {{ $blog->id }}, <b>Views:</b> {{ $blog->views }}, <b>Created at</b>: {{ $blog->created_at }}, <b>Updated At</b> {{ $blog->updated_at }}</p>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="title"><b>Title</b></label>
+                    <p>{{ $blog->title }}</p>
+                    <p>Slug: {{ $blog->slug }}</p>
+                </div>
+                <div class="form-group">
+                    <label for="excerpt"><b>Excerpt/Summary</b></label>
+                    {{ $blog->excerpt }}
+                </div>
+                <div class="form-group">
+                    <label for="description"><b>Description</b></label>
+                    {!! $blog->description !!}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="image"><b>Featured Image</b></label>
+                    <img class="img-fluid" src="{{ url( Storage::url($blog->image) ) }}" alt="{{ $blog->title }}">
+                </div>
+                <div class="form-group">
+                    <label for="categories"><b>Categories</b></label>
+                    <ul>
+                    @foreach($blog->categories as $category)
+                        <li>{{ $category->name }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="user_id"><b>Author</b></label>
+                    {{ $blog->user->name }}
+                </div>
+                <div class="form-group">
+                    <label for="is_active"><b>Publish</b></label>
+                    {{ $blog->is_active == 1 ? 'Yes' : 'No' }}
+                </div>
+                <div class="form-group">
+                    <label for="allow_comments"><b>Allow Comments</b></label>
+                    {{ $blog->allow_comments == 1 ? 'Yes' : 'No' }}
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
