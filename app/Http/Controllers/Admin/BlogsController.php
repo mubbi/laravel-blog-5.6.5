@@ -195,6 +195,9 @@ class BlogsController extends Controller
 
         // Step 3 - Attach/Sync Related Items
         $blog->categories()->sync($categoryArr);
+
+        // Back to index with success
+        return redirect()->route('blogs.index')->with('custom_success', 'Blog has been added successfully');
     }
 
     /**
