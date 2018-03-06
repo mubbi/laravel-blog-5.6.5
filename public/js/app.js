@@ -13641,20 +13641,6 @@ $.ajaxSetup({
 // Subscriber Form
 __webpack_require__(36);
 
-// Count Char Helper
-function countChar(val, id, limit) {
-    leftChar = limit - val.value.length;
-    $('#' + id).text(leftChar + " Characters Left");
-}
-
-// Admin helpers
-function callDeletItem(id, model) {
-    if (confirm('Are you sure?')) {
-        $("#deletItemForm").attr('action', base_url + '/admin/' + model + '/' + id);
-        $("#deletItemForm").submit();
-    }
-}
-
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {

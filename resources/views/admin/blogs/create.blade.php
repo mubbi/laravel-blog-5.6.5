@@ -75,7 +75,22 @@
 
 @section('custom_js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script>
+// Integrate TinyMCE Editor
+tinymce.init({
+    selector:'#description',
+    height: 500,
+    theme: 'modern',
+    plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen help",
+        "insertdatetime media table contextmenu paste imagetools wordcount"
+    ],
+    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media fullscreen",
+    image_advtab: true,
+});
+
 $(document).ready(function() {
     $('#categories').select2({
         theme: "bootstrap",
