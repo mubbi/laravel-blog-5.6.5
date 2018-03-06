@@ -16,6 +16,8 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
             'App\Listeners\EmailSubscribedListener',
+            'App\Events\BlogDeleted',
+            'App\Events\BlogDeleting',
         ],
     ];
 
