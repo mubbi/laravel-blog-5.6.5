@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());" title="Share on Pinterest">
-                    <img class="img-thumbnail img-responsive mb-4" src="{{ $blog->image }}" alt="{{ $blog->title }}">
+                    <img class="img-thumbnail img-responsive mb-4" src="{{ url( Storage::url($blog->image) ) }}" alt="{{ $blog->title }}">
                 </a>
             </div>
             <div class="col-md-6">

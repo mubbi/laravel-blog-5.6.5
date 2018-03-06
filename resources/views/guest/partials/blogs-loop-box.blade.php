@@ -7,7 +7,7 @@
     @foreach($blogs as $blog)
     <div class="col-md-6">
         <div class="card">
-            <img class="card-img-top" src="{{ $blog->image }}" alt="{{ $blog->title }}">
+            <img class="card-img-top" src="{{ url( Storage::url($blog->image) ) }}" alt="{{ $blog->title }}">
             <div class="card-body">
                 <h5 class="card-title"><a href="{{ url('post/'.$blog->slug) }}">{{ $blog->title }}</a></h5>
                 <p class="card-text">{{ $blog->excerpt }}</p>

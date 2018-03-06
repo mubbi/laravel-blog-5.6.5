@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8080/laravel/blog/laravel-blog-5.6.5/public'),
+    'url' => env('APP_URL', 'http://localhost:81/laravel/blog/laravel-blog-5.6.5/public'),
 
     /*
     |--------------------------------------------------------------------------
