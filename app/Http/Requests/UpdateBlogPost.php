@@ -24,10 +24,10 @@ class UpdateBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'bail|required|unique:blogs|max:60',
+            'title' => 'bail|required|max:60',
             'excerpt' => 'required|max:280',
             'description' => 'required',
-            'image' => 'file|image|max:2048',
+            'image' => 'file|image|max:2048|mimes:jpg,jpeg,bmp,png,gif',
             'categories' => 'required|array',
             'user_id' => 'required|integer|exists:users,id',
             'is_active' => 'required|boolean',

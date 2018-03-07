@@ -184,7 +184,7 @@ class BlogsController extends Controller
         // Step 1 - Init item Obj
         $blog = new Blog;
 
-        // Set items fields
+        // Set item fields
         $blog->title = $request->title;
         $blog->excerpt = $request->excerpt;
         $blog->description = $request->description;
@@ -245,13 +245,14 @@ class BlogsController extends Controller
         // Pre Validations are done in UpdateBlogPost Request
         // Update the item
 
+        // Get the item to update
         $blog = Blog::findOrFail($id);
 
         // Store File & Get Path
-        if ($request->file('image')) {
+        if ($request->hasFile('image')) {
             $imagePath = Storage::putFile('images', $request->file('image'));
         } else {
-            $imagePath = $blog->image);
+            $imagePath = $blog->image;
         }
 
         // Store & Get Categories
@@ -269,7 +270,7 @@ class BlogsController extends Controller
             }
         }
 
-        // Step 1 - Set items fields
+        // Step 1 - Set item fields
         $blog->title = $request->title;
         $blog->excerpt = $request->excerpt;
         $blog->description = $request->description;
@@ -285,7 +286,7 @@ class BlogsController extends Controller
         $blog->categories()->sync($categoryArr);
 
         // Back to index with success
-        return redirect()->route('blogs.index')->with('custom_success', 'Blog has been updated successfully');
+        return back()->with('custom_success', 'Blog has been updated successfully');
     }
 
     /**

@@ -27,7 +27,7 @@ class StoreBlogPost extends FormRequest
             'title' => 'bail|required|unique:blogs|max:60',
             'excerpt' => 'required|max:280',
             'description' => 'required',
-            'image' => 'required|file|image|max:2048',
+            'image' => 'required|file|image|max:2048|mimes:jpg,jpeg,bmp,png,gif',
             'categories' => 'required|array',
             'user_id' => 'required|integer|exists:users,id',
             'is_active' => 'required|boolean',

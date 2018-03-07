@@ -12,6 +12,7 @@
     <div class="card-body">
         <form method="post" action="{{ route('blogs.update', $blog->id) }}" enctype="multipart/form-data" novalidate>
             @csrf
+            {{ method_field('PUT') }}
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -135,6 +136,7 @@ $(document).ready(function() {
           },
         }
     });
+    $('#categories').trigger('change');
 });
 
 // Count Char Helper
