@@ -38,28 +38,39 @@
                     <div class="form-group">
                         <label for="categories">Categories <span class="required">*</span></label>
                         <select class="form-control" id="categories" name="categories[]" required multiple>
+                            @if (is_array(old('categories')))
+                                @foreach (old('categories') as $oldCategory)
+                                <option value="{{ $oldCategory }}" selected="selected">
+                                    @if(is_numeric($oldCategory))
+                                        {{ App\Category::where('id', $oldCategory)->get()->pluck('name')[0] }}
+                                    @else
+                                        {{ $oldCategory }}
+                                    @endif
+                                </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="user_id">Author <span class="required">*</span></label>
                         <select class="form-control" id="user_id" name="user_id" required>
                             @foreach($authors as $author)
-                            <option value="{{ $author->id }}" @if(Auth::user()->id == $author->id) selected @endif>{{ $author->name }} ({{ $author->email }})</option>
+                            <option value="{{ $author->id }}" @if(old('user_id', Auth::user()->id) == $author->id) selected @endif>{{ $author->name }} ({{ $author->email }})</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="is_active">Publish <span class="required">*</span></label>
                         <select class="form-control" id="is_active" name="is_active" required>
-                            <option value="1" selected>Yes</option>
-                            <option value="0">No</option>
+                            <option value="1" @if(old('is_active', '1') == '1') selected @endif>Yes</option>
+                            <option value="0" @if(old('is_active') == '0') selected @endif>No</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="allow_comments">Allow Comments <span class="required">*</span></label>
                         <select class="form-control" id="allow_comments" name="allow_comments" required>
-                            <option value="1" selected>Yes</option>
-                            <option value="0">No</option>
+                            <option value="1" @if(old('allow_comments', '1') == '1') selected @endif>Yes</option>
+                            <option value="0" @if(old('allow_comments') == '0') selected @endif>No</option>
                         </select>
                     </div>
                 </div>
@@ -131,6 +142,7 @@ $(document).ready(function() {
           },
         }
     });
+    $('#categories').trigger('change');
 });
 
 // Count Char Helper
