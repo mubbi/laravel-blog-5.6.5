@@ -251,6 +251,8 @@ class BlogsController extends Controller
         // Store File & Get Path
         if ($request->hasFile('image')) {
             $imagePath = Storage::putFile('images', $request->file('image'));
+            // Delet Old Image
+            Storage::delete($blog->image);
         } else {
             $imagePath = $blog->image;
         }
