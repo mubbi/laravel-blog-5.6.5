@@ -10,7 +10,7 @@
     <div class="card-header">Blogs - Add New <a href="{{ route('blogs.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
-        <form method="post" action="{{ route('blogs.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('blogs.store') }}" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
                 <div class="col-md-8">
