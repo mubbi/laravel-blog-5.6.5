@@ -82,14 +82,9 @@
 var editor_config = {
     path_absolute : base_url,
     selector:'#description',
-    height: 500,
-    theme: 'modern',
-    plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen help",
-        "insertdatetime media table contextmenu paste imagetools wordcount"
-    ],
-    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media fullscreen",
+    height: 450,
+    plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+  toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat',
     image_advtab: true,
     relative_urls: false,
     file_browser_callback : function(field_name, url, type, win) {

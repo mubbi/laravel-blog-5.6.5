@@ -180,7 +180,7 @@ return [
     | directives are not supported.
     */
     'php_ini_overrides' => [
-        'memory_limit'        => '10M',
+        'memory_limit'        => '100M',
     ],
 
 ];
