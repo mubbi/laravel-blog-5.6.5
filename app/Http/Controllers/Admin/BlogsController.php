@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreBlogPost;
+use App\Http\Requests\UpdateBlogPost;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -222,8 +223,14 @@ class BlogsController extends Controller
      */
     public function edit($id)
     {
+        // Blog Details
         $blog = Blog::findOrFail($id);
-        return view('admin/blogs/edit', ['blog' => $blog]);
+        // Authors List
+        $authors = User::active()->whereHas('roles', function ($query) {
+            $query->where('role', '=', 'add_blog');
+        })->get();
+
+        return view('admin/blogs/edit', ['blog' => $blog, 'authors' => $authors]);
     }
 
     /**
@@ -233,9 +240,52 @@ class BlogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBlogPost $request, $id)
     {
-        //
+        // Pre Validations are done in UpdateBlogPost Request
+        // Update the item
+
+        $blog = Blog::findOrFail($id);
+
+        // Store File & Get Path
+        if ($request->file('image')) {
+            $imagePath = Storage::putFile('images', $request->file('image'));
+        } else {
+            $imagePath = $blog->image);
+        }
+
+        // Store & Get Categories
+        $categoryArr = array();
+        foreach ($request->categories as $category) {
+            if (is_numeric($category)) {
+                // Store in array
+                $categoryArr[] = $category;
+            } else {
+                // if the item not numeric that means that its new item and we should create it
+                // User Id will automatically set by mutator in Category model
+                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
+                // include the new item to array
+                $categoryArr[] = $newCategory->id;
+            }
+        }
+
+        // Step 1 - Set items fields
+        $blog->title = $request->title;
+        $blog->excerpt = $request->excerpt;
+        $blog->description = $request->description;
+        $blog->image = $imagePath;
+        $blog->user_id = $request->user_id;
+        $blog->is_active = $request->is_active;
+        $blog->allow_comments = $request->allow_comments;
+
+        // Step 2 - Save Item
+        $blog->save();
+
+        // Step 3 - Attach/Sync Related Items
+        $blog->categories()->sync($categoryArr);
+
+        // Back to index with success
+        return redirect()->route('blogs.index')->with('custom_success', 'Blog has been updated successfully');
     }
 
     /**

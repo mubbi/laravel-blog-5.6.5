@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description <span class="required">*</span></label>
-                        <textarea name="description" id="description" class="form-control" rows="6" required>{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" class="form-control" rows="6" required>{!! old('description') !!}</textarea>
                     </div>
                 </div>
                 <div class="col-md-4">
