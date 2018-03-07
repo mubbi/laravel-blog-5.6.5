@@ -50,6 +50,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('blogs', 'Admin\BlogsController');
 
+    Route::get('categories/bulk/delete', 'Admin\CategoriesController@bulkDelete')->name('categories.bulkDelete');
     Route::get('categories/ajax-select', 'Admin\CategoriesController@categoriesAjaxSelectData')->name('categories.ajaxSelectData');
     Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categories.ajaxData');
     Route::resource('categories', 'Admin\CategoriesController');
