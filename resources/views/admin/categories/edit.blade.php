@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">Categories - Add New <a href="{{ route('categories.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
+    <div class="card-header">Categories - Edit <a href="{{ route('categories.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
         <form method="post" action="{{ route('categories.update', $category->id) }}">
