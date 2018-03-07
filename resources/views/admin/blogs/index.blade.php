@@ -113,7 +113,7 @@ $(document).ready(function() {
         "deferRender": true,
         buttons: [
             {
-                text: '<i class="fas fa-trash"></i> Bulk Trash',
+                text: '<i class="fas fa-trash"></i> Bulk Trash <span class="badge badge-light" id="bulk_count">0</span>',
                 className: 'btn btn-sm btn-danger disabled',
                 action: function ( e, dt, node, config ) {
                     if (confirm('Are you sure?')) {
@@ -219,6 +219,12 @@ function toggleBulkBtnClass() {
     } else {
         $('#bulkDeleteButton').addClass('disabled');
     }
+    countBulk();
+}
+
+// Count Bulk Selected Items and show
+function countBulk() {
+    $("#bulk_count").html( $('[name="selected_ids[]"]:checked').length );
 }
 </script>
 @endsection

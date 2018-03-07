@@ -118,7 +118,7 @@ $(document).ready(function() {
                 }
             },
             {
-                text: '<i class="fas fa-history"></i> Bulk Restore',
+                text: '<i class="fas fa-history"></i> Bulk Restore <span class="badge badge-light" id="bulk_count">0</span>',
                 className: 'btn btn-sm btn-success disabled',
                 action: function ( e, dt, node, config ) {
                     if (confirm('Are you sure?')) {
@@ -216,6 +216,12 @@ function toggleBulkBtnClass() {
     } else {
         $('#bulkRestoreButton').addClass('disabled');
     }
+    countBulk();
+}
+
+// Count Bulk Selected Items and show
+function countBulk() {
+    $("#bulk_count").html( $('[name="selected_ids[]"]:checked').length );
 }
 </script>
 @endsection
