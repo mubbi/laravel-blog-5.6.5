@@ -125,7 +125,7 @@ class BlogsController extends Controller
                     return '
                      <div class="dropdown float-right">
                         <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
+                        <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="'.route('blogs.restore', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
