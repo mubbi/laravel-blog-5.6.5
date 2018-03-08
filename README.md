@@ -42,6 +42,7 @@ And of course blog project itself is open source with a public repository on Git
 3. `php artisan key:generate`
 4. `Edit config/app.php & config/database.php`
 5. `php artisan migrate --seed`
+6. `Register in the application as the first user and get all admin roles by default`
 
 # Screenshots
 ### Home Page
