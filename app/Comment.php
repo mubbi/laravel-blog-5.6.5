@@ -16,11 +16,11 @@ class Comment extends Model
     ];
 
     /**
-     * Get the post that owns the comment.
+     * Get the blog that owns the comment.
      */
-    public function post()
+    public function blog()
     {
-        return $this->belongsTo('App\Post');
+        return $this->belongsTo('App\Blog');
     }
 
     public function scopeActive($query)

@@ -46,8 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::get('blogs/restore/{id}', 'Admin\BlogsController@restore')->name('blogs.restore');
     Route::get('blogs/delet/permanent/{id}', 'Admin\BlogsController@permanentDelet')->name('blogs.permanentDelet');
     Route::get('blogs/trash/empty', 'Admin\BlogsController@emptyTrash')->name('blogs.emptyTrash');
-    Route::get('blogs/publish/status{id}', 'Admin\BlogsController@updateActiveStatus')->name('blogs.publishStatus');
-
+    Route::get('blogs/publish/status/{id}', 'Admin\BlogsController@updateActiveStatus')->name('blogs.publishStatus');
     Route::resource('blogs', 'Admin\BlogsController');
 
     Route::get('categories/bulk/delete', 'Admin\CategoriesController@bulkDelete')->name('categories.bulkDelete');
@@ -55,21 +54,24 @@ Route::prefix('admin')->group(function () {
     Route::get('categoriesData', 'Admin\CategoriesController@categoriesData')->name('categories.ajaxData');
     Route::resource('categories', 'Admin\CategoriesController');
 
+    Route::get('commentsData', 'Admin\CommentsController@commentsData')->name('comments.ajaxData');
+    Route::get('comments/bulk/delete', 'Admin\CommentsController@bulkDelete')->name('comments.bulkDelete');
+    Route::get('comments/bulk/spam', 'Admin\CommentsController@bulkSpam')->name('comments.bulkSpam');
+    Route::get('comments/spam/status/{id}', 'Admin\CommentsController@updateSpamStatus')->name('comments.spamStatus');
     Route::resource('comments', 'Admin\CommentsController', ['except' => [
         'create', 'store'
     ]]);
-    Route::get('commentsData', 'Admin\CommentsController@commentsData')->name('commentsAjaxData');
 
+    Route::get('usersData', 'Admin\UsersController@usersData')->name('users.ajaxData');
     Route::resource('users', 'Admin\UsersController');
-    Route::get('usersData', 'Admin\UsersController@usersData')->name('usersAjaxData');
 
+    Route::get('rolesData', 'Admin\RolesController@rolesData')->name('roles.ajaxData');
     Route::resource('roles', 'Admin\RolesController', ['except' => [
         'create', 'store', 'update', 'destroy', 'edit'
     ]]);
-    Route::get('rolesData', 'Admin\RolesController@rolesData')->name('rolesAjaxData');
 
+    Route::get('settingsData', 'Admin\SettingsController@settingsData')->name('settings.ajaxData');
     Route::resource('settings', 'Admin\SettingsController', ['except' => [
         'create', 'store', 'destroy'
     ]]);
-    Route::get('settingsData', 'Admin\SettingsController@settingsData')->name('settingsAjaxData');
 });
