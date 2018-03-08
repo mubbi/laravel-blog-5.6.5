@@ -119,7 +119,7 @@ class UsersController extends Controller
         $user->password = Hash::make($request->password);
         $user->about = $request->about;
         $user->is_active = $request->is_active;
-        $user->confirmation_token = md5(uniqid($request->email, true));
+        $user->confirmation_token = md5(uniqid($request->email, true) . time());
         $user->save();
 
         // Back to index with success
