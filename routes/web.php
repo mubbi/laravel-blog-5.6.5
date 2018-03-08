@@ -65,11 +65,6 @@ Route::prefix('admin')->group(function () {
     Route::get('usersData', 'Admin\UsersController@usersData')->name('users.ajaxData');
     Route::resource('users', 'Admin\UsersController');
 
-    Route::get('rolesData', 'Admin\RolesController@rolesData')->name('roles.ajaxData');
-    Route::resource('roles', 'Admin\RolesController', ['except' => [
-        'create', 'store', 'update', 'destroy', 'edit'
-    ]]);
-
     Route::get('settingsData', 'Admin\SettingsController@settingsData')->name('settings.ajaxData');
     Route::resource('settings', 'Admin\SettingsController', ['except' => [
         'create', 'store', 'destroy'
