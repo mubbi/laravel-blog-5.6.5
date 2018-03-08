@@ -70,6 +70,26 @@ class Blog extends Model
     }
 
     /**
+     * Custome scope for Like Search.
+     *
+     * @return string
+     */
+    public function scopeLike($query, $field, $value)
+    {
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
+    /**
+     * Custome scope for Or Like Search.
+     *
+     * @return string
+     */
+    public function scopeOrLike($query, $field, $value)
+    {
+        return $query->orWhere($field, 'LIKE', "%$value%");
+    }
+
+    /**
      * Get the user record associated with the blog.
      */
     public function user()

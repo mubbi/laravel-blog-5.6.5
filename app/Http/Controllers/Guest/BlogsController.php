@@ -83,4 +83,28 @@ class BlogsController extends Controller
         // Redirect back with error
         return back()->withInput()->with('custom_errors', 'Unable to add comment');
     }
+
+
+    /**
+     * Search the blogs.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // Search Query
+        $query = $request->q;
+        if ($query == '') {
+            return redirect('/');
+        }
+
+        // Get blogs by Search Query and active ones
+        $blogs = Blog::like('title', $query)
+                        ->orLike('excerpt', $query)
+                        ->active()
+                        ->orderBy('created_at', 'desc')
+                        ->simplePaginate(app('global_settings')[2]['setting_value']);
+        // Return View
+        return view('guest/search', ['blogs' => $blogs, 'query' => $query]);
+    }
 }

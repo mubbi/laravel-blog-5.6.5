@@ -17,6 +17,7 @@ Route::get('post', function () {
     return redirect('/');
 });
 
+Route::get('search', 'Guest\BlogsController@search');
 Route::get('post/{blog}', 'Guest\BlogsController@single');
 Route::get('category/{category}', 'Guest\BlogsController@category');
 Route::post('post/comment', 'Guest\BlogsController@comment');
