@@ -40,11 +40,12 @@ And of course blog project itself is open source with a public repository on Git
 1. `git clone https://github.com/mubbi/laravel-blog-5.6.5.git`
 2. `cd laravel-blog-5.6.5`
 3. `composer install`
-4. `php artisan key:generate`
-5.  Edit file `config/app.php` - and set your correct app url
-6.  Edit file `config/database.php` - and set your DB connection details
-7. `php artisan migrate --seed`
-8. `Register in the application as the first user and get all admin roles by default`
+4. `rename .env.example to .env`
+5. `php artisan key:generate`
+6.  Edit file `config/app.php` - and set your correct app url
+7.  Edit file `config/database.php` - and set your DB connection details
+8. `php artisan migrate --seed`
+9. `Register in the application as the first user and get all admin roles by default`
 
 # Screenshots
 ### Home Page
