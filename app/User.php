@@ -40,7 +40,7 @@ class User extends Authenticatable
     /**
      * Get the blogs record associated with the user.
      */
-    public function blog()
+    public function blogs()
     {
         return $this->hasMany('App\Blog');
     }
@@ -48,7 +48,7 @@ class User extends Authenticatable
     /**
      * Get the category record associated with the user.
      */
-    public function category()
+    public function categories()
     {
         return $this->hasMany('App\Category');
     }

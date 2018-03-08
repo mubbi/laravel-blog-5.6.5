@@ -264,6 +264,16 @@ class UsersController extends Controller
             }
         }
 
+        // Foreign Key Error Protection
+        if ($user->blogs()->count() > 0) {
+            return back()->with('custom_errors', 'User can not be deleted. It has some blogs.');
+        }
+
+        // Foreign Key Error Protection
+        if ($user->categories()->count() > 0) {
+            return back()->with('custom_errors', 'User can not be deleted. It has some categories.');
+        }
+
         // delete its roles
         $user->roles()->detach();
         // delete user
@@ -299,8 +309,18 @@ class UsersController extends Controller
             if ($user->hasRole('super_admin')) {
                 // if logged in user dont have Super Admin Role stop him
                 if (!Auth::user()->hasRole('super_admin')) {
-                    return back()->with('custom_errors', 'One of the user can not be deleted. You need super admin role.');
+                    return back()->with('custom_errors', '<b>"'.$user->name . '"</b>: user can not be deleted. You need super admin role.');
                 }
+            }
+
+            // Foreign Key Error Protection
+            if ($user->blogs()->count() > 0) {
+                return back()->with('custom_errors', '<b>"'.$user->name . '"</b>: User can not be deleted. It has some blogs.');
+            }
+
+            // Foreign Key Error Protection
+            if ($user->categories()->count() > 0) {
+                return back()->with('custom_errors', '<b>"'.$user->name . '"</b>: User can not be deleted. It has some categories.');
             }
 
             // All validations passed lets delete the user
