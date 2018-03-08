@@ -53,12 +53,13 @@ And of course blog project itself is open source with a public repository on Git
 3. `composer install`
 4. `rename .env.example to .env`
 5. `php artisan key:generate`
-6.  Edit file `config/app.php` - and set your correct app url
+6.  Edit file `config/app.php & .env` - and set your correct app url
 7.  Edit file `config/database.php` - and set your DB connection details
 8. `php artisan migrate --seed`
 9. `php artisan storage:link`
-10. `After installing, you may need to configure some permissions. Directories within the "storage" and the "bootstrap/cache" directories should be writable by your web server or the project will not run.`
-11. `Register in the application as the first user and get all admin roles by default`
+10. `set mailtrap credentials in .env file to avoid swift email errors`
+11. `After installing, you may need to configure some permissions. Directories within the "storage" and the "bootstrap/cache" directories should be writable by your web server or the project will not run.`
+12. `Register in the application as the first user and get all admin roles by default`
 
 # Screenshots
 ### Home Page
