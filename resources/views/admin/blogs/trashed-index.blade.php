@@ -107,7 +107,11 @@ $(document).ready(function() {
         buttons: [
             {
                 text: '<i class="fas fa-trash"></i> Empty Trash <span class="badge badge-light">{{ $trashed_items_count }}</span>',
+                @if($trashed_items_count == 0)
+                className: 'btn btn-sm btn-danger disabled',
+                @else
                 className: 'btn btn-sm btn-danger',
+                @endif
                 action: function ( e, dt, node, config ) {
                     if (confirm('Are you sure?')) {
                         window.location.href = '{{ route("blogs.emptyTrash") }}';
