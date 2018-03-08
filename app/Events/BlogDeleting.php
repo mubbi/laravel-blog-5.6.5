@@ -19,6 +19,7 @@ class BlogDeleting
         $this->blog = $blog;
         // Delet Blog Categories
         $this->blog->categories()->detach();
+        $this->blog->comments()->delete();
     }
 
     /**
