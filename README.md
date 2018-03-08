@@ -26,6 +26,7 @@ This blog project uses some open source projects and free projects to work prope
 * Laravel 5.6.5 - Framework for Web Artisans
 * jQuery - duh
 * FontAwesome - Design savy icons for developers
+* TinyMCE - WYSIWYG rich text editor
 * DataTable - Easily Manage Data sets for management purpose using jquery
 * Sluggable - make slugs easily in laravel
 * Roumen Feed - make RSS Feed easily in laravel
