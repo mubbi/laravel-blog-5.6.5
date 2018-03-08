@@ -37,18 +37,18 @@ And of course blog project itself is open source with a public repository on Git
 # Installation Guide
 1. `git clone https://github.com/mubbi/laravel-blog-5.6.5.git`
 2. `composer install`
-3. `npm install`
-4. `npm run dev`
-5. `php artisan key:generate`
-6. `php artisan migrate --seed`
+3. `php artisan key:generate`
+4. `npm install`
+5. `php artisan migrate --seed`
+6. `npm run dev`
 
 # Screenshots
-Home Page
--
+###Home Page
+
 ![Home Page](https://preview.ibb.co/ku0G7n/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_1520539108112.png)
 
-Admin Area
--
+###Admin Area
+
 ![Admin Area](https://preview.ibb.co/cSRQYS/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_admin_blogs_1520532879922.png)
 
 License
