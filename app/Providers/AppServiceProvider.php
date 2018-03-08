@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Share sidebar Categories with all views
         if (Schema::hasTable('categories')) {
-            $categories = Category::select('name', 'slug')->get();
+            $categories = Category::select('name', 'slug', 'id')->get();
             View::share('sidebar_categories', $categories);
         }
 
