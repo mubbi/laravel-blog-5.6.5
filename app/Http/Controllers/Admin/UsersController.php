@@ -264,7 +264,9 @@ class UsersController extends Controller
             }
         }
 
-        // delete
+        // delete its roles
+        $user->roles()->detach();
+        // delete user
         $status = $user->delete();
 
         if ($status) {
@@ -284,14 +286,31 @@ class UsersController extends Controller
     public function bulkDelete(Request $request)
     {
         $arrId = explode(",", $request->ids);
-        $status = User::destroy($arrId);
 
-        if ($status) {
-            // If success
-            return back()->with('custom_success', 'Bulk Delete action completed.');
-        } else {
-            // If no success
-            return back()->with('custom_errors', 'Bulk Delete action failed. Something went wrong.');
+        foreach ($arrId as $userId) {
+            // Prevent user from self deleting
+            if ($userId == Auth::user()->id) {
+                return back()->with('custom_errors', 'You can not delete yourself. Ask super admin to do that.');
+            }
+
+            // Get User
+            $user = User::findOrFail($userId);
+            // Prevent user from deleting a super admin
+            if ($user->hasRole('super_admin')) {
+                // if logged in user dont have Super Admin Role stop him
+                if (!Auth::user()->hasRole('super_admin')) {
+                    return back()->with('custom_errors', 'One of the user can not be deleted. You need super admin role.');
+                }
+            }
+
+            // All validations passed lets delete the user
+            // delete its roles
+            $user->roles()->detach();
+            // delete user
+            $user->delete();
         }
+
+        // All users deleted
+        return back()->with('custom_success', 'Bulk Delete action completed.');
     }
 }
