@@ -105,5 +105,9 @@ class RolesTableSeeder extends Seeder
             'role' => 'manage_settings',
             'description' => 'Permission to manage roles of a user'
         ]);
+        Role::create([
+            'role' => 'super_admin',
+            'description' => 'Permission makes a user undeletable and uneditable by any admin except another Super Admin'
+        ]);
     }
 }
