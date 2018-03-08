@@ -74,7 +74,7 @@ class UsersController extends Controller
                             <a class="dropdown-item" href="'.route('users.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
                             <a class="dropdown-item" href="'.route('users.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
                             '.$status_action.'
-                            <a class="dropdown-item" href="'.route('users.editRoles', $model->id).'"><i class="fas fa-cogs"></i> Manage Roles</a>
+                            <a class="dropdown-item" href="'.route('users.editRoles', $model->id).'"><i class="fas fa-shield-alt"></i> Manage Roles</a>
                             <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'users\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
