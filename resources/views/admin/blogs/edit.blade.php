@@ -22,13 +22,13 @@
                     </div>
                     <div class="form-group">
                         <label for="excerpt">Excerpt/Summary <span class="required">*</span></label>
-                        <textarea name="excerpt" id="excerpt" class="form-control" rows="3" maxlength="280" placeholder="summary of my beautiful words..." onkeyup="countChar(this, 'charNumExcerpt', 280)" required>{{ old('excerpt', $blog->title) }}</textarea>
+                        <textarea name="excerpt" id="excerpt" class="form-control" rows="3" maxlength="280" placeholder="summary of my beautiful words..." onkeyup="countChar(this, 'charNumExcerpt', 280)" required>{{ old('excerpt', $blog->excerpt) }}</textarea>
                         <span id="charNumExcerpt" class="text-info">280 Characters Left</span>
                         <small id="excerptHelp" class="form-text text-muted">Excerpts are hand-crafted summaries of your content helps search engines and to show post on home page</small>
                     </div>
                     <div class="form-group">
                         <label for="description">Description <span class="required">*</span></label>
-                        <textarea name="description" id="description" class="form-control" rows="6" required>{!! old('description', $blog->title) !!}</textarea>
+                        <textarea name="description" id="description" class="form-control" rows="6" required>{!! old('description', $blog->description) !!}</textarea>
                     </div>
                 </div>
                 <div class="col-md-4">
