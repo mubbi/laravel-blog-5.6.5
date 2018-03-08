@@ -41,8 +41,8 @@ And of course blog project itself is open source with a public repository on Git
 2. `cd laravel-blog-5.6.5`
 3. `composer install`
 4. `php artisan key:generate`
-5. `Edit config/app.php` - and set your correct app url
-6. `Edit config/database.php` - and set your DB conenction details
+5.  Edit file `config/app.php` - and set your correct app url
+6.  Edit file `config/database.php` - and set your DB connection details
 7. `php artisan migrate --seed`
 8. `Register in the application as the first user and get all admin roles by default`
 
