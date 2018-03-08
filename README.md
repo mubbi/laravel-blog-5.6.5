@@ -20,7 +20,7 @@ This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
   - Simple & Minimal UI Design
 
 
-### Tech
+# Tech
 This blog project uses some open source projects and free projects to work properly:
 * Twitter Bootstrap 4 - great UI boilerplate for modern web apps
 * Laravel 5.6.5 - Framework for Web Artisans
@@ -33,6 +33,14 @@ This blog project uses some open source projects and free projects to work prope
 * Yajra Laravel Datatables - Easily integrat DataTable backend for laravel
 
 And of course blog project itself is open source with a public repository on GitHub.
+
+# Installation Guide
+1. `git clone https://github.com/mubbi/laravel-blog-5.6.5.git`
+2. `composer install`
+3. `npm install`
+4. `npm run dev`
+5. `php artisan key:generate`
+6. `php artisan migrate --seed`
 
 # Screenshots
 Home Page
