@@ -31,11 +31,13 @@ class DashboardController extends Controller
         $blogs_count = Blog::count();
         $comments_count = Comment::count();
         $categories_count = Category::count();
+        $users_count = User::count();
 
         return view('admin/dashboard', [
             'blogs_count' => $blogs_count,
             'comments_count' => $comments_count,
             'categories_count' => $categories_count,
+            'users_count' => $users_count,
         ]);
     }
 }

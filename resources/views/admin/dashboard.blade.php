@@ -19,6 +19,7 @@
                         <p class="card-text">{{ $blogs_count }} Blogs</p>
                         <p class="card-text">{{ $comments_count }} Comments</p>
                         <p class="card-text">{{ $categories_count }} Categories</p>
+                        <p class="card-text">{{ $users_count }} Users</p>
                     </div>
                 </div>
             </div>
