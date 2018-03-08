@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -175,6 +176,15 @@ class UsersController extends Controller
 
         // Get the item to update
         $user = User::findOrFail($id);
+
+        // Prevent user from updating a super admin
+        if ($user->hasRole('super_admin')) {
+            // if logged in user dont have Super Admin Role stop him
+            if (!Auth::user()->hasRole('super_admin')) {
+                return back()->with('custom_errors', 'User can not be updated. You need super admin role.');
+            }
+        }
+
         // Update the item
         $user->name = $request->name;
         if ($request->password != '') {
@@ -200,6 +210,19 @@ class UsersController extends Controller
     {
         // get user
         $user = User::findOrFail($id);
+
+        // Prevent user from self deactivating
+        if ($user->id == Auth::user()->id) {
+            return back()->with('custom_errors', 'You can not deactive yourself. Ask super admin to do that.');
+        }
+
+        // Prevent user from deactivating a super admin
+        if ($user->hasRole('super_admin')) {
+            // if logged in user dont have Super Admin Role stop him
+            if (!Auth::user()->hasRole('super_admin')) {
+                return back()->with('custom_errors', 'User can not be deactived. You need super admin role.');
+            }
+        }
 
         if ($user->is_active == 0) {
             $user->is_active = 1;
@@ -227,6 +250,19 @@ class UsersController extends Controller
     {
         // Find the user by $id
         $user = User::findOrFail($id);
+
+        // Prevent user from self deleting
+        if ($user->id == Auth::user()->id) {
+            return back()->with('custom_errors', 'You can not delete yourself. Ask super admin to do that.');
+        }
+
+        // Prevent user from deleting a super admin
+        if ($user->hasRole('super_admin')) {
+            // if logged in user dont have Super Admin Role stop him
+            if (!Auth::user()->hasRole('super_admin')) {
+                return back()->with('custom_errors', 'User can not be deleted. You need super admin role.');
+            }
+        }
 
         // delete
         $status = $user->delete();
