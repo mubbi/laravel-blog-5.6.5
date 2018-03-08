@@ -13,11 +13,14 @@
             {{ method_field('PUT') }}
             <div class="row">
                 <div class="col-md-5">
+                    @foreach($settings as $setting)
                     <div class="form-group">
-                        <label for="name">Name <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                        <label for="name">{{ ucfirst(str_replace('_', ' ', $setting->setting_name)) }} <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="{{ $setting->setting_name }}" name="settings[{{ $setting->setting_name }}]" value="{{ $setting->setting_value }}" required>
+                        <small id="{{ $setting->setting_name }}Help" class="form-text text-muted">{{ $setting->description }}</small>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Submit</button>
+                    @endforeach
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
                 </div>
             </div>
         </form>

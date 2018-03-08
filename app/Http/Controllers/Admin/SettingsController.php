@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
@@ -36,6 +37,25 @@ class SettingsController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        // Validations
+        $validatedData = $request->validate([
+            'settings.*' => 'required',
+        ]);
+
+        // If validations fail
+        if (!$validatedData) {
+            return redirect()->back()
+                    ->withErrors($validator)->withInput();
+        }
+
+        foreach ($request->settings as $key => $value) {
+            // Store the item
+            DB::table('settings')
+            ->where('setting_name', $key)
+            ->update(['setting_value' => $value]);
+        }
+
+        // Back to index with success
+        return redirect()->back()->with('custom_success', 'Settings has been updated successfully');
     }
 }
