@@ -43,11 +43,11 @@ And of course blog project itself is open source with a public repository on Git
 6. `npm run dev`
 
 # Screenshots
-###Home Page
+### Home Page
 
 ![Home Page](https://preview.ibb.co/ku0G7n/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_1520539108112.png)
 
-###Admin Area
+### Admin Area
 
 ![Admin Area](https://preview.ibb.co/cSRQYS/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_admin_blogs_1520532879922.png)
 
