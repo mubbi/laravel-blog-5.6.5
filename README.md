@@ -56,7 +56,8 @@ And of course blog project itself is open source with a public repository on Git
 6.  Edit file `config/app.php` - and set your correct app url
 7.  Edit file `config/database.php` - and set your DB connection details
 8. `php artisan migrate --seed`
-9. `Register in the application as the first user and get all admin roles by default`
+9. `After installing, you may need to configure some permissions. Directories within the "**storage**" and the "**bootstrap/cache**" directories should be writable by your web server or the project will not run.`
+10. `Register in the application as the first user and get all admin roles by default`
 
 # Screenshots
 ### Home Page
