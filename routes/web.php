@@ -65,8 +65,6 @@ Route::prefix('admin')->group(function () {
     Route::get('usersData', 'Admin\UsersController@usersData')->name('users.ajaxData');
     Route::resource('users', 'Admin\UsersController');
 
-    Route::get('settingsData', 'Admin\SettingsController@settingsData')->name('settings.ajaxData');
-    Route::resource('settings', 'Admin\SettingsController', ['except' => [
-        'create', 'store', 'destroy'
-    ]]);
+    Route::get('settings', 'Admin\SettingsController@index')->name('settings.index');
+    Route::put('settings/update', 'Admin\SettingsController@update')->name('settings.update');
 });
