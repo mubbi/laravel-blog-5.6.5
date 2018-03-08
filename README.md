@@ -36,6 +36,17 @@ This blog project uses some open source projects and free projects to work prope
 
 And of course blog project itself is open source with a public repository on GitHub.
 
+# Minimum Requirements
+* PHP >= 7.1.3
+* MySQL >= 5.0.12
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* XML PHP Extension
+* Ctype PHP Extension
+* JSON PHP Extension
+
 # Installation Guide
 1. `git clone https://github.com/mubbi/laravel-blog-5.6.5.git`
 2. `cd laravel-blog-5.6.5`
