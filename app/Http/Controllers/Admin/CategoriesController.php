@@ -69,6 +69,48 @@ class CategoriesController extends Controller
                 ->rawColumns(['actions','users.name','bulkAction','created_at'])
                 ->make(true);
     }
+
+    /**
+     *  Select2 categories - Process select2 ajax request.
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function categoriesAjaxSelectData(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $resultCount = 10;
+
+            $offset = ($page - 1) * $resultCount;
+
+            $categories = Category::where('name', 'LIKE', '%' . $request->term. '%')
+                                ->orderBy('name')
+                                ->skip($offset)
+                                ->take($resultCount)
+                                ->selectRaw('id, name as text')
+                                ->get();
+
+            $count = Count(Category::where('name', 'LIKE', '%' . $request->term. '%')
+                                ->orderBy('name')
+                                ->selectRaw('id, name as text')
+                                ->get());
+
+            $endCount = $offset + $resultCount;
+            $morePages = $count > $endCount;
+
+            $results = array(
+              "results" => $categories,
+              "pagination" => array(
+                  "more" => $morePages
+                  )
+              );
+            return response()->json($results);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
