@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,8 @@ class UsersController extends Controller
         $this->middleware('role:edit_user', ['only' => ['update', 'edit', 'updateActiveStatus']]);
 
         $this->middleware('role:delet_user', ['only' => ['destroy', 'bulkDelete']]);
+
+        $this->middleware('role:manage_roles', ['only' => ['editRoles', 'updateRoles']]);
     }
 
     /**
@@ -71,6 +74,7 @@ class UsersController extends Controller
                             <a class="dropdown-item" href="'.route('users.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
                             <a class="dropdown-item" href="'.route('users.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
                             '.$status_action.'
+                            <a class="dropdown-item" href="'.route('users.editRoles', $model->id).'"><i class="fas fa-cogs"></i> Manage Roles</a>
                             <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'users\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
@@ -332,5 +336,65 @@ class UsersController extends Controller
 
         // All users deleted
         return back()->with('custom_success', 'Bulk Delete action completed.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editRoles($id)
+    {
+        // Find the user by $id
+        $user = User::findOrFail($id);
+        $roles = Role::get();
+
+        return view('admin/users/edit-roles', ['roles' => $roles, 'user' => $user]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRoles(Request $request, $id)
+    {
+
+        // Validations
+        $validatedData = $request->validate([
+            'roles' => 'required|array',
+        ]);
+
+        // If validations fail
+        if (!$validatedData) {
+            return redirect()->back()
+                    ->withErrors($validator)->withInput();
+        }
+
+        // Get the item to update
+        $user = User::findOrFail($id);
+
+
+        // Prevent user from self deactivating
+        if ($user->id == Auth::user()->id) {
+            return back()->with('custom_errors', 'You can not change your roles. Ask super admin to do that.');
+        }
+
+        // Prevent user from updating a super admin
+        if ($user->hasRole('super_admin')) {
+            // if logged in user dont have Super Admin Role stop him
+            if (!Auth::user()->hasRole('super_admin')) {
+                return back()->with('custom_errors', 'User can not be updated. You need super admin role.');
+            }
+        }
+
+        // Update Roles
+        $user->roles()->sync($request->roles);
+
+        // Back to index with success
+        return back()->with('custom_success', 'User Roles has been updated successfully');
     }
 }

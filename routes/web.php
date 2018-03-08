@@ -66,6 +66,8 @@ Route::prefix('admin')->group(function () {
     Route::get('usersData', 'Admin\UsersController@usersData')->name('users.ajaxData');
     Route::get('users/bulk/delete', 'Admin\UsersController@bulkDelete')->name('users.bulkDelete');
     Route::get('users/active/status/{id}', 'Admin\UsersController@updateActiveStatus')->name('users.activeStatus');
+    Route::get('users/roles/{id}/edit', 'Admin\UsersController@editRoles')->name('users.editRoles');
+    Route::put('users/roles/{id}', 'Admin\UsersController@updateRoles')->name('users.updateRoles');
     Route::resource('users', 'Admin\UsersController');
 
     Route::get('settings', 'Admin\SettingsController@index')->name('settings.index');
