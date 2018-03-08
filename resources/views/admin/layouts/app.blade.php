@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" data-toggle="tooltip" title="View Homepage">
                     {{ app('global_settings')[0]['setting_value'] }} - Admin
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@
                             <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li><a class="nav-link" href="{{ route('blogs.index') }}">Manage Blogs</a></li>
                             <li><a class="nav-link" href="{{ route('categories.index') }}">Manage Categories</a></li>
                             <li><a class="nav-link" href="{{ route('comments.index') }}">Manage Comments</a></li>
@@ -53,7 +54,6 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
