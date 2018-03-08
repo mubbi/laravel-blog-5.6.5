@@ -16,6 +16,7 @@ This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
   - Automated Emails on Subscriber with Queue/Job
   - Automated Emails for newsletters with Queue/Job
   - Laravel Migrations
+  - Laravel Seeders
   - Simple & Minimal UI Design
 
 
