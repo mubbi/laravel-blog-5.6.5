@@ -40,7 +40,8 @@ And of course blog project itself is open source with a public repository on Git
 1. `git clone https://github.com/mubbi/laravel-blog-5.6.5.git`
 2. `composer install`
 3. `php artisan key:generate`
-4. `php artisan migrate --seed`
+4. `Edit config/app.php & config/database.php`
+5. `php artisan migrate --seed`
 
 # Screenshots
 ### Home Page
