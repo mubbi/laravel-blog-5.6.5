@@ -17,7 +17,9 @@
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
     @yield('custom_css')
-
+     <script>
+        var base_url = "{{ url('') }}";
+    </script>
 </head>
 <body>
     <div id="app">

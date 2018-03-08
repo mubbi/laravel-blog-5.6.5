@@ -16,7 +16,11 @@
                             <li class="media mb-3">
                                 <img class="mr-3 rounded-circle" src="https://www.gravatar.com/avatar/{{ md5( strtolower( trim("$comment->email") ) ) }}?d=http://placehold.it/80" alt="{{ $comment->name }}">
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-1">{{ $comment->name }} - <small>{{ $comment->created_at->diffForHumans() }}</small></h5>
+                                    <h5 class="mt-0 mb-1">{{ $comment->name }} - <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                    @auth
+                                    <a href="javascript:void(0);" onclick="callDeletItem('{{ $comment->id }}', 'comments');" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                    @endauth
+                                    </h5>
                                     {{ $comment->body }}
                                 </div>
                             </li>
@@ -32,4 +36,23 @@
 
     </div>
 </div>
+
+@auth
+<form action="#" method="post" id="deletCommentForm" display: none;>
+    @csrf
+    {{ method_field('DELETE') }}
+</form>
+
+@section('custom_js')
+<script>
+function callDeletItem(id, model) {
+    if (confirm('Are you sure?')) {
+        $("#deletCommentForm").attr('action', base_url + '/admin/'+ model + '/' + id);
+        $("#deletCommentForm").submit();
+    }
+}
+</script>
+@endsection
+@endauth
+
 @endif

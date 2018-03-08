@@ -17,6 +17,9 @@
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
     @yield('custom_css')
+     <script>
+        var base_url = "{{ url('') }}";
+    </script>
 
 </head>
 <body>
@@ -92,9 +95,6 @@
     </div>
 
     <!-- Scripts -->
-    <script>
-        var base_url = "{{ url('') }}";
-    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('custom_js')
