@@ -18,7 +18,7 @@
                         <th><input type="checkbox" id="bulk_selector"></th>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Created By</th>
+                        <th>Author</th>
                         <th>Trashed at</th>
                         <th></th>
                     </tr>
