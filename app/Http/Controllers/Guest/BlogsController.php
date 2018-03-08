@@ -18,10 +18,18 @@ class BlogsController extends Controller
      */
     public function single(Blog $blog)
     {
+        // Increase Views of blog
+        $blog->views = $blog->views + 1;
+        $blog->save();
+
+        // Get Comments
         $comments = $blog->comments()->active()
                                     ->orderBy('created_at', 'desc')
                                     ->simplePaginate(app('global_settings')[3]['setting_value']);
+        // Get Count of Comments
         $total_comments = $blog->comments()->active()->count();
+
+        // Return View
         return view('guest/single', ['blog' => $blog, 'comments' => $comments,  'total_comments' => $total_comments]);
     }
 

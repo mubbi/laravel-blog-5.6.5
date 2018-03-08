@@ -18,13 +18,16 @@
             <div class="col-md-6">
                 <p><i class="fas fa-user"></i> Posted by: <a href="#author_section">{{ $blog->user->name }}</a></p>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <p>
                     <i class="fas fa-tags"></i> Categories:
                     @foreach($blog->categories as $category)
                     <a href="{{ url('category/'.$category->slug) }}" class="badge badge-primary">{{ $category->name }}</a>
                     @endforeach
                 </p>
+            </div>
+            <div class="col-md-3">
+                <p><i class="fas fa-eye"></i> Views: {{ $blog->views }}</p>
             </div>
             <div class="col-md-12">
                 {!! $blog->description !!}
