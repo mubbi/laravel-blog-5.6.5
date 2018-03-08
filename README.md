@@ -1,6 +1,8 @@
 # Laravel Blog - v5.6.5
 This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
+
 (NOTE: Under Construction - On Going Development)
+
 # Features!
   - Blogs/Articles
   - Categories
@@ -51,7 +53,5 @@ And of course blog project itself is open source with a public repository on Git
 
 ![Admin Area](https://preview.ibb.co/cSRQYS/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_admin_blogs_1520532879922.png)
 
-License
-----
-
+# License
 GNU GPLv3
