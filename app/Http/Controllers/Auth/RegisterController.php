@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -86,7 +87,19 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
         dispatch(new SendUserVerificationEmail($user));
-        return view('auth/verification-msg');
+
+        // Count Users
+        $countUsers = User::count();
+        if ($countUsers == 1) {
+            // attach roles to first user
+            $this->attachRoles($user);
+            // Activate first user
+            $this->activateFirst($user);
+            // return view('auth/login');
+            return redirect('/login')->with('custom_success', 'You have got all the super admin roles, login now.');
+        } else {
+            return view('auth/verification-msg');
+        }
     }
 
     /**
@@ -102,5 +115,31 @@ class RegisterController extends Controller
         if ($user->save()) {
             return view('auth/email-confirmation', ['user' => $user]);
         }
+    }
+
+    /**
+    * Attach all roles to first registered user.
+    *
+    * @param $token
+    * @return \Illuminate\Http\Response
+    */
+    public function attachRoles($user)
+    {
+        $roles = Role::get()->pluck('id');
+        $user = User::where('id', $user->id)->first();
+        $user->roles()->attach($roles);
+    }
+
+    /**
+    * Activate first registered user.
+    *
+    * @param $token
+    * @return \Illuminate\Http\Response
+    */
+    public function activateFirst($user)
+    {
+        $user = User::where('id', $user->id)->first();
+        $user->is_active = 1;
+        $user->save();
     }
 }
