@@ -33,7 +33,11 @@ This blog project uses some open source projects and free projects to work prope
 And of course blog project itself is open source with a public repository on GitHub.
 
 # Screenshots
+Home Page
+-
 ![Home Page](https://preview.ibb.co/h3QDL7/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_1520532702582.png)
+Admin Area
+-
 ![Admin Area](https://preview.ibb.co/cSRQYS/screencapture_localhost_81_laravel_blog_laravel_blog_5_6_5_public_admin_blogs_1520532879922.png)
 
 License
