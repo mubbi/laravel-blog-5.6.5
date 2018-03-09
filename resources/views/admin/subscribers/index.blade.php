@@ -155,9 +155,7 @@ $(document).ready(function() {
                 text: '<i class="far fa-eye-slash"></i> Show/Hide Columns',
                 className: 'btn btn-sm btn-secondary',
                 columnText: function ( dt, idx, title ) {
-                    if (idx == 0) {
-                        return 'Bulk Action';
-                    } else if (idx == 5) {
+                    if (idx == 4) {
                         return 'Actions';
                     } else {
                         return title;
