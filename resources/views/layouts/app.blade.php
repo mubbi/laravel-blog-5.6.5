@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ app('global_settings')[0]['setting_value'] }} - {{ app('global_settings')[1]['setting_value'] }}</title>
+    <title>@yield('pageTitle', app('global_settings')[0]['setting_value'].' - '.app('global_settings')[1]['setting_value'])</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('pageTitle', $blog->title.' - '.app('global_settings')[0]['setting_value'])
 
 @section('content')
 <div class="card mb-3">
