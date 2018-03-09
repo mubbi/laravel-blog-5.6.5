@@ -102,10 +102,6 @@ class RolesTableSeeder extends Seeder
             'description' => 'Permission to view all subscribers'
         ]);
         Role::create([
-            'role' => 'view_subscriber',
-            'description' => 'Permission to view a subscriber'
-        ]);
-        Role::create([
             'role' => 'edit_subscriber',
             'description' => 'Permission to change active status of subscriber'
         ]);

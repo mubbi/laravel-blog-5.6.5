@@ -15,7 +15,6 @@ class SubscribersController extends Controller
     public function __construct()
     {
         $this->middleware('role:view_all_subscriber', ['only' => ['index','subscribersData']]);
-        $this->middleware('role:view_subscriber', ['only' => ['show']]);
 
         $this->middleware('role:edit_subscriber', ['only' => ['updateActiveStatus']]);
 
@@ -45,6 +44,13 @@ class SubscribersController extends Controller
                 ->editColumn('created_at', function ($model) {
                     return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
                 })
+                ->editColumn('is_active', function ($model) {
+                    if ($model->is_active == 0) {
+                        return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
+                    } else {
+                        return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
+                    }
+                })
                 ->addColumn('actions', function ($model) {
                     if ($model->is_active == 0) {
                         $active_action = '<a class="dropdown-item" href="'.route('subscribers.activeStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Activate</a>';
@@ -57,26 +63,13 @@ class SubscribersController extends Controller
                         <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('subscribers.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
                             '.$active_action.'
                             <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'subscribers\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','created_at'])
+                ->rawColumns(['actions','created_at', 'is_active'])
                 ->make(true);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $subscriber = Subscriber::findOrFail($id);
-        return view('admin/subscribers/show', ['subscriber' => $subscriber]);
     }
 
     /**

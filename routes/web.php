@@ -84,6 +84,6 @@ Route::prefix('admin')->group(function () {
     Route::get('subscribers/active/{id}', 'Admin\SubscribersController@updateActiveStatus')->name('subscribers.activeStatus');
     Route::get('subscribersData', 'Admin\SubscribersController@subscribersData')->name('subscribers.ajaxData');
     Route::resource('subscribers', 'Admin\SubscribersController', ['except' => [
-        'create', 'store'
+        'create', 'store', 'show'
     ]]);
 });
