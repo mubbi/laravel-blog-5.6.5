@@ -18,8 +18,10 @@ class BlogDeleted
     public function __construct(Blog $blog)
     {
         $this->blog = $blog;
-        // Delet Blog Image
-        Storage::delete($this->blog->image);
+        if ($this->blog->deleted_at != null) {
+            // Delet Blog Image
+            Storage::delete($this->blog->image);
+        }
     }
 
     /**

@@ -17,9 +17,11 @@ class BlogDeleting
     public function __construct(Blog $blog)
     {
         $this->blog = $blog;
-        // Delet Blog Categories
-        $this->blog->categories()->detach();
-        $this->blog->comments()->delete();
+        if ($this->blog->deleted_at != null) {
+            // Delet Blog Categories
+            $this->blog->categories()->detach();
+            $this->blog->comments()->delete();
+        }
     }
 
     /**
