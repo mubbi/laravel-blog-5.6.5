@@ -8,7 +8,36 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+    <html itemscope itemtype="http://schema.org/Article">
+
+    <!-- SEO Title -->
     <title>@yield('pageTitle', app('global_settings')[0]['setting_value'].' - '.app('global_settings')[1]['setting_value'])</title>
+
+    <!-- SEO Meta Descrition -->
+    <meta name="description" content="@yield('pageDescription', app('global_settings')[1]['setting_value'])">
+
+    <!-- Social Meta Tags -->
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="@yield('pageTitle', app('global_settings')[0]['setting_value'].' - '.app('global_settings')[1]['setting_value'])">
+    <meta itemprop="description" content="@yield('pageDescription', app('global_settings')[1]['setting_value'])">
+    <meta itemprop="image" content="http://www.example.com/image.jpg">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('pageTitle', app('global_settings')[0]['setting_value'].' - '.app('global_settings')[1]['setting_value'])">
+    <meta name="twitter:description" content="@yield('pageDescription', app('global_settings')[1]['setting_value'])">
+    <!-- Twitter summary card with large image must be at least 280x150px -->
+    <meta name="twitter:image:src" content="http://www.example.com/image.jpg">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="@yield('pageTitle', app('global_settings')[0]['setting_value'].' - '.app('global_settings')[1]['setting_value'])" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ url()->full() }}" />
+    <meta property="og:image" content="@yield('pageImage', 'http://placehold.it/700x700')" />
+    <meta property="og:description" content="@yield('pageDescription', app('global_settings')[1]['setting_value'])" />
+    <meta property="og:site_name" content="{{ app('global_settings')[0]['setting_value'] }}" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

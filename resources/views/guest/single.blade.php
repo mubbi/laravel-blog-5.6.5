@@ -1,5 +1,8 @@
 @extends('layouts.app')
+
 @section('pageTitle', $blog->title.' - '.app('global_settings')[0]['setting_value'])
+@section('pageDescription', $blog->excerpt)
+@section('pageImage', url( Storage::url( $blog->image ) ) )
 
 @section('content')
 <div class="card mb-3">
