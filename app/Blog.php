@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Events\BlogDeleted;
-use App\Events\BlogDeleting;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,16 +26,6 @@ class Blog extends Model
      */
     protected $fillable = [
         'title', 'slug', 'image', 'excerpt', 'description', 'views', 'user_id', 'is_active', 'allow_comments'
-    ];
-
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    protected $dispatchesEvents = [
-        'deleted' => BlogDeleted::class,
-        'deleting' => BlogDeleting::class,
     ];
 
     public function sluggable()

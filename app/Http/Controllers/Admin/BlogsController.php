@@ -413,6 +413,12 @@ class BlogsController extends Controller
         // Find the blog by $id
         $blog = Blog::onlyTrashed()->findOrFail($id);
 
+        // Delete Related Items First
+        $blog->categories()->detach();
+        $blog->comments()->delete();
+        // Delete Image
+        Storage::delete($this->blog->image);
+
         // Permanent Delet the blog
         $status = $blog->forceDelete();
 
@@ -434,14 +440,18 @@ class BlogsController extends Controller
     public function emptyTrash()
     {
         // get all trashed blogs and permanent Delet the blogs
-        $status = Blog::whereNotNull('deleted_at')->onlyTrashed()->forceDelete();
+        $blogs = Blog::onlyTrashed()->get();
 
-        if ($status) {
-            // If success
-            return back()->with('custom_success', 'Trash has been emptied.');
-        } else {
-            // If no success
-            return back()->with('custom_errors', 'Failed to empty trash. Something went wrong.');
+        foreach ($blogs as $blog) {
+            // Delete Related Items First
+            $blog->categories()->detach();
+            $blog->comments()->delete();
+            // Delete Image
+            Storage::delete($this->blog->image);
+            // Delete Blog
+            $blog->forceDelete();
         }
+
+        return back()->with('custom_success', 'Trash has been emptied.');
     }
 }
