@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'Search "'.$query.'" - '.app('global_settings')[0]['setting_value'])
+
 @section('content')
 <div class="card">
     <div class="card-header">Search "{{ $query }}"</div>
