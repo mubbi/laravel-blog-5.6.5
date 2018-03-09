@@ -18,7 +18,7 @@ class BlogDeleted
     public function __construct(Blog $blog)
     {
         $this->blog = $blog;
-        if ($this->blog->deleted_at != null) {
+        if ($this->blog->deleted_at == null) {
             // Delet Blog Image
             Storage::delete($this->blog->image);
         }
