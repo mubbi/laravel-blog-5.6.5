@@ -71,7 +71,7 @@ $(document).ready(function() {
         processing: true,
         "language": {
             "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            "emptyTable": "No Users Found, Create the first blog.",
+            "emptyTable": "No Users Found.",
             "oPaginate": {
                 sNext: 'Next <i class="fas fa-chevron-right"></i>',
                 sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
