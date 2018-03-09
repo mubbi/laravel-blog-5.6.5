@@ -52,6 +52,7 @@
                             <li><a class="nav-link" href="{{ route('comments.index') }}">Comments</a></li>
                             <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
                             <li><a class="nav-link" href="{{ route('settings.index') }}">Settings</a></li>
+                            <li><a class="nav-link" href="{{ route('subscribers.index') }}">Subscribers</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

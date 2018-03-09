@@ -98,6 +98,22 @@ class RolesTableSeeder extends Seeder
             'description' => 'Permission to delet a user'
         ]);
         Role::create([
+            'role' => 'view_all_subscriber',
+            'description' => 'Permission to view all subscribers'
+        ]);
+        Role::create([
+            'role' => 'view_subscriber',
+            'description' => 'Permission to view a subscriber'
+        ]);
+        Role::create([
+            'role' => 'edit_subscriber',
+            'description' => 'Permission to change active status of subscriber'
+        ]);
+        Role::create([
+            'role' => 'delet_subscriber',
+            'description' => 'Permission to delet a subscriber'
+        ]);
+        Role::create([
             'role' => 'manage_roles',
             'description' => 'Permission to manage roles of a user'
         ]);
