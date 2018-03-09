@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Email Subscribed Successfully. You will get email updated now.</h1>
+                <h1>Email Subscribed Successfully. You will get email Weekly Newsletters and updates now.</h1>
             </div>
         </div>
 
