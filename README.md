@@ -69,6 +69,14 @@ Admin Pass: ` mubbi123 `
 11. `After installing, you may need to configure some permissions. Directories within the "storage" and the "bootstrap/cache" directories should be writable by your web server or the project will not run.`
 12. `Register in the application as the first user and get all admin roles by default`
 
+NOTE: Automatic user registration activation emails and subscriber verification emails are sent using the queue worker, therefore you must enable the queue worker on the project: https://laravel.com/docs/5.6/queues#running-the-queue-worker
+
+### Weekly Newsletter Guide
+1. Set Queue Driver in .env or config/queue.php file
+2. Follow: https://laravel.com/docs/5.6/scheduling#introduction
+3. From the above link learn how to make a cron job for ` schedule:run `
+4. Once this cron job is set for every minute then the weekly emails will be sent automatically
+
 # Screenshots
 ### Home Page
 
