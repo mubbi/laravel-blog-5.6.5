@@ -38,7 +38,9 @@ And of course blog project itself is open source with a public repository on Git
 
 # Live Demo
 http://mubbiqureshi.com/laravel-blog/public/
+
 Admin ID: mubbi@test.com
+
 Admin Pass: mubbi123
 
 
