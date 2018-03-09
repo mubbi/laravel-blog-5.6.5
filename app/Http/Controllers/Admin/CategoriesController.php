@@ -244,7 +244,7 @@ class CategoriesController extends Controller
         $categories = Category::find($arrId);
         foreach ($categories as $category) {
             if ($category->blogs()->count() > 0) {
-                return back()->with('custom_errors', 'Categories were not deleted. Few of them already attached with some blogs.');
+                return back()->with('custom_errors', '<b>'.$category->name. '</b>: It is already attached with some blogs. Categories were not deleted');
             }
         }
 
