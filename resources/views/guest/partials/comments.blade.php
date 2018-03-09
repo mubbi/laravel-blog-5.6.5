@@ -18,6 +18,7 @@
                                 <div class="media-body">
                                     <h5 class="mt-0 mb-1">{{ $comment->name }} - <small>{{ $comment->created_at->diffForHumans() }}</small>
                                     @auth
+                                    <a href="{{ route('comments.spamStatus', $comment->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-bug"></i> Spam</a>
                                     <a href="javascript:void(0);" onclick="callDeletItem('{{ $comment->id }}', 'comments');" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                     @endauth
                                     </h5>
