@@ -14,4 +14,15 @@ class Subscriber extends Model
     protected $fillable = [
         'email', 'confirmation_token', 'is_active'
     ];
+
+
+    /**
+     * Custome scope for Active Subscribers.
+     *
+     * @return string
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }
