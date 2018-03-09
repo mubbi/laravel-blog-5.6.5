@@ -417,7 +417,7 @@ class BlogsController extends Controller
         $blog->categories()->detach();
         $blog->comments()->delete();
         // Delete Image
-        Storage::delete($this->blog->image);
+        Storage::delete($blog->image);
 
         // Permanent Delet the blog
         $status = $blog->forceDelete();
@@ -447,7 +447,7 @@ class BlogsController extends Controller
             $blog->categories()->detach();
             $blog->comments()->delete();
             // Delete Image
-            Storage::delete($this->blog->image);
+            Storage::delete($blog->image);
             // Delete Blog
             $blog->forceDelete();
         }
