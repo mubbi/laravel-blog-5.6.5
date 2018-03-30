@@ -1,7 +1,6 @@
 # Laravel Blog - Based on Laravel v5.6.5
 This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
 
-(NOTE: Under Construction - On Going Development)
 
 # Features!
   - Blogs/Articles
