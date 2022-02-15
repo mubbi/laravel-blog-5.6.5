@@ -35,14 +35,6 @@ This blog project uses some open source projects and free projects to work prope
 
 And of course blog project itself is open source with a public repository on GitHub.
 
-# Live Demo
- ` http://mubbiqureshi.com/laravel-blog/public/ `
-
-Admin ID: ` mubbi@test.com `
-
-Admin Pass: ` mubbi123 `
-
-
 # Minimum Requirements
 * PHP >= 7.1.3
 * MySQL >= 5.0.12
