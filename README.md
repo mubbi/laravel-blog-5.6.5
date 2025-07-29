@@ -1,3 +1,6 @@
+# REPO ARCHIEVED
+This repo has been arcieved and a new repo has been introduced: https://github.com/mubbi/laravel-blog-api
+
 # Laravel Blog - Based on Laravel v5.6.5
 This is a sample blog based on Laravel 5.6 framework and Bootstrap 4.
 
